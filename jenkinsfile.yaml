@@ -10,6 +10,7 @@ pipelineConfiguration:
     helm:
       namespace: microservices
       name: rvdv-front
+      tier: front
       deployment:
         replicas: 1
         revisionHistoryLimit: 3
