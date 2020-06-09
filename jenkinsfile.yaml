@@ -13,8 +13,8 @@ pipelineConfiguration:
       deployment:
         replicas: 1
         revisionHistoryLimit: 3
-        image: "642711691858.dkr.ecr.eu-west-1.amazonaws.com/rivadavia/rivadavia-nodejs-base"
-        version: "1.0"
+        image: "642711691858.dkr.ecr.eu-west-1.amazonaws.com/rivadavia/node-image"
+        version: "0.1"
         imagePullPolicy: Always
         containerPort: 8888
         replicas: 1
