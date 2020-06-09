@@ -16,7 +16,7 @@ pipelineConfiguration:
         image: "642711691858.dkr.ecr.eu-west-1.amazonaws.com/rivadavia/node-image"
         version: "0.1"
         imagePullPolicy: Always
-        containerPort: 8888
+        containerPort: 4200
         replicas: 1
         imagePullSecrets:
           name: ecr-rivadavia-apikey
@@ -24,9 +24,9 @@ pipelineConfiguration:
         targetPort: 8080
         type: LoadBalancer   
       env:
-        nodeConfigPort: 8080
+        nodeConfigPort: 4200
         remoteRepositories: https://nexus.ust-global-spain.com/repository  
-        repositoryId: maven-snapshots
+        repositoryId: devopspaas-npm-snapshots
         appGroupId: com.itaca.msa.front
         appArtifactId: itaca-0.0.0.tgz
   nodejs: 
@@ -37,7 +37,7 @@ pipelineConfiguration:
   artifactory: 
     project: devopspaas-npm-snapshots
     apiNpm: ""
-    credential: devops-robot-ldap
+    credential: devops-robot
   custom: 
     inputParams: true
     inputParamsFile: ./customParameters.groovy
