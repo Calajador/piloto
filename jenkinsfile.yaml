@@ -22,7 +22,7 @@ pipelineConfiguration:
         imagePullSecrets:
           name: ecr-rivadavia-apikey
       service:
-        targetPort: 8080
+        targetPort: 4200
         type: LoadBalancer   
       env:
         nodeConfigPort: 4200
