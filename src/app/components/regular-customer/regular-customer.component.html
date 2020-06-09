@@ -1,0 +1,37 @@
+<form class="form" [formGroup]="regularPersonForm">
+  
+    
+    <h2>¿Es cliente habitual?</h2>
+    <div class="inputGroup">
+      <input  id="yes_checkbox" name="radio" type="radio"  
+      (change)="onSelectRegularPerson('SI')"
+      formControlName="regularPerson" />
+      <label for="yes_checkbox">Si</label>
+    </div>
+    <div class="inputGroup">
+      <input id="no_checkbox" name="radio" 
+      (change)="onSelectRegularPerson('NO')"
+      type="radio" formControlName="regularPerson"/>
+      <label for="no_checkbox">No</label>
+    </div>
+    
+
+
+    <div class="row justify-content-center mt-5">
+        <div class="col-6 p-5">
+            <div class="d-flex justify-content-between bd-highlight">
+                
+                <button class="btn btn-outline-primary" (click)="onClickBack()" >Atras</button>
+                <button class="btn btn-primary" (click)="onClickContinue()">Continuar</button>
+            </div>
+        </div>                
+    </div>
+
+</form>
+  
+  
+    
+      
+  
+  
+ 
