@@ -27,7 +27,7 @@ pipelineConfiguration:
         nodeConfigPort: 4200
         remoteRepositories: https://nexus.ust-global-spain.com/repository  
         repositoryId: devopspaas-npm-snapshots
-        appGroupId: com.itaca.msa.front
+        appGroupId: itaca
         appArtifactId: itaca-0.0.0.tgz
   nodejs: 
     contextDir: ./
