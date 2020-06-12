@@ -17,15 +17,15 @@ pipelineConfiguration:
         image: "642711691858.dkr.ecr.eu-west-1.amazonaws.com/rivadavia/node-image"
         version: "0.1"
         imagePullPolicy: Always
-        containerPort: 4200
+        containerPort: 80
         replicas: 1
         imagePullSecrets:
           name: ecr-rivadavia-apikey
       service:
-        targetPort: 4200
+        targetPort: 80
         type: LoadBalancer   
       env:
-        nodeConfigPort: 4200
+        nodeConfigPort: 80
         remoteRepositories: https://nexus.ust-global-spain.com/repository  
         repositoryId: devopspaas-npm-snapshots
         appGroupId: itaca
