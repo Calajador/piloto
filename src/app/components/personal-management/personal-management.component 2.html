@@ -1,0 +1,94 @@
+<div class="container mt-3">
+   <div class="row justify-content-center">
+       
+            <form class="form col-md-12" [formGroup]="personForm">
+                <div class="form-row col-md-10 mt-3">       
+                    <label class="col-md-3">Nombre</label>
+                    <input class="form-control col-md-6"  
+                    [ngClass]="{ 'is-invalid': submitted && f.name_singup.errors}" 
+                    [(ngModel)]="person.firstName"
+                    formControlName="name_singup" type="text">  
+                    <div  *ngIf="submitted && f.surname_singup.errors" class="col-md-10 text-center invalid-feedback">
+                        Porfavor digite un nombre
+                    </div>     
+                </div>
+                <div class="form-row col-md-10 mt-3">       
+                    <label class="col-md-3">Apellidos</label>
+                    
+                        <input class="form-control col-md-6"
+                        [ngClass]="{ 'is-invalid': submitted && f.surname_singup.errors}" 
+                        [(ngModel)]="person.lastName"
+                         formControlName="surname_singup"  type="text">
+                        <div  *ngIf="submitted && f.surname_singup.errors" class="col-md-10 text-center invalid-feedback">
+                            Porfavor digite un apellido
+                        </div>
+                   
+                          
+                </div>  
+                <div class="form-row col-md-10 mt-3">       
+                    <label class="col-md-3">DNI</label>
+                    <input class="form-control col-md-6"
+                    [(ngModel)]="identification.identification"
+                    formControlName="dni_singup" 
+                    [ngClass]="{ 'is-invalid': submitted && f.dni_singup.errors}"  type="text">  
+                    <div  *ngIf="submitted && f.dni_singup.errors" class="col-md-10 text-center invalid-feedback">
+                        Porfavor digite un DNI válido
+                    </div>     
+                </div>  
+                <div class="form-row col-md-10 mt-3">       
+                    <label class="col-md-3">Fecha Nacimiento</label>
+                    <input class="form-control col-md-5" formControlName="date_singup"
+                    [(ngModel)]="person.dateBorn"
+                    [ngClass]="{ 'is-invalid': submitted && f.date_singup.errors}" type="date"> 
+                    <div  *ngIf="submitted && f.date_singup.errors" class="col-md-10 text-center invalid-feedback">
+                        Porfavor digite un Fecha de nacimiento valida
+                    </div>      
+                </div> 
+                <div class="form-row col-md-10 mt-3">       
+                    <label class="col-md-3">Calle</label>
+                    <input class="form-control col-5" formControlName="address_singup"
+                    [(ngModel)]="address.street"
+                    [ngClass]="{ 'is-invalid': submitted && f.address_singup.errors}" type="text">
+                    <label class="col-md-1">Número</label>
+                    <input class="form-control col-md-1" 
+                    [(ngModel)]="address.number"
+                    formControlName="number_singup"
+                     type="number">    
+                    <label class="col-md-1">Piso</label>
+                    <input class="form-control col-md-1"    
+                    [(ngModel)]="address.floor" formControlName="floor_singup" type="number">           
+                </div> 
+                <div class="form-row col-md-10 mt-3">       
+                    <label class="col-md-3">Provincia</label>
+                    <input class="form-control col-md-5" 
+                    [(ngModel)]="address.province"
+                    formControlName="city_singup" type="text">     
+                    <label class="col-md-2">Codigo postal</label>
+                    <input class="form-control col-md-2" 
+                    [(ngModel)]="address.postalCode"
+                    formControlName="postalcode_singup" type="text">     
+                </div> 
+                <div class="form-row col-md-10 mt-3">       
+                    <label class="col-md-3">Pais</label>
+                    <select class="col-md-5" (change)="onChangeCountry($event)"  formControlName="country_singup" [(ngModel)]="address.idCountry" >
+                        <option value="32">España</option>
+                    </select>    
+                </div> 
+            </form>            
+    
+   </div>
+   <div class="row justify-content-center mt-2">
+        <div class="col-6 p-5">
+            <div class="d-flex justify-content-between bd-highlight">
+            
+                <button class="btn btn-outline-primary" (click)="onClickBack()">Atras</button>
+                <button class="btn btn-primary" (click)="onClickContinue()">Continuar</button>
+            </div>
+        </div>                
+    </div>
+    <div class="row flex-row-reverse">
+    
+        <button class="btn btn-danger float-rigth">Abandonar</button>
+   
+    </div>
+</div>

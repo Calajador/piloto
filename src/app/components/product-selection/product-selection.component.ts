@@ -20,7 +20,7 @@ export class ProductSelectionComponent implements OnInit {
   }
 
   onClickContinue(){
-    this.router.navigate(['/regular']);
+    this.router.navigate(['/regular','policy']);
   }
 
   getProduct(){
