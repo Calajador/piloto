@@ -29,7 +29,7 @@ pipelineConfiguration:
         remoteRepositories: https://nexus.ust-global-spain.com/repository  
         repositoryId: devopspaas-npm-snapshots
         appGroupId: itaca
-        appArtifactId: itaca-0.0.0.tgz
+        appArtifactId: itaca-0.0.1.tgz
   nodejs: 
     contextDir: ./
     settings: devopspaas-npmrc
