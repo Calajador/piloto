@@ -17,6 +17,7 @@
                                     <div class="col-md-9">
                                         <select class="form-control" formControlName="gender_intervening" 
                                         [(ngModel)]="gender"
+                                        id="gender_intervening"
                                         (change)="onChangeGender()">
                                             <option value="M">Masculino</option>
                                             <option value="F">Femenino</option>
@@ -29,7 +30,7 @@
                                     </div>
                                     <div class="col-md-9">
                                         <select class="form-control" formControlName="licenses_intervening" 
-                                       
+                                        id="license_type"
                                         (change)="onChangeLicenses()">
                                             <option value="8">B1</option>
                                             <option value="9">B2</option>
@@ -54,6 +55,7 @@
                                     <div class="col-md-9">
                                         <input type="date" class="form-control"
                                         [(ngModel)]="obtaning"
+                                        id="obtaining_year"
                                         formControlName="obtaning_intervening">
                                     </div>
                                 </div>

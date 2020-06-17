@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Person } from 'src/app/model/Person';
 import { FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-
+import {Location} from '@angular/common';
 @Component({
   selector: 'app-intervener-allocation',
   templateUrl: './intervener-allocation.component.html',
@@ -19,6 +19,7 @@ export class IntervenerAllocationComponent implements OnInit {
 
   constructor(private formBuilder:FormBuilder,
     private _route:ActivatedRoute,
+    private _location: Location,
     private router:Router) { }
 
   ngOnInit(): void {
@@ -82,7 +83,7 @@ export class IntervenerAllocationComponent implements OnInit {
   }
 
   onClickBack(){
-    
+    this._location.back();
   }
 
 }

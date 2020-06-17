@@ -8,6 +8,8 @@ import { PersonService } from 'src/app/services/person.service';
 import { DatePipe } from '@angular/common';
 import { Spinner } from 'ngx-spinner/lib/ngx-spinner.enum';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Country } from 'src/app/model/Country';
+import { MasterService } from 'src/app/services/master.service';
 
 @Component({
   selector: 'app-personal-management',
@@ -19,6 +21,7 @@ export class PersonalManagementComponent implements OnInit {
   personForm:any;
   submitted:boolean;
   person:Person;
+  countries:Country[];
   type:string;
   address:Address;
   identification:Identification;
@@ -26,6 +29,7 @@ export class PersonalManagementComponent implements OnInit {
   constructor(private router:Router,
     private formBuilder:FormBuilder,
     private datePipe: DatePipe,
+    private masterService:MasterService,
     private spinner:NgxSpinnerService,
     private _route:ActivatedRoute,
     private personService:PersonService) { }
@@ -46,6 +50,8 @@ export class PersonalManagementComponent implements OnInit {
       postalcode_singup: ['', [Validators.required,Validators.maxLength(4)]],
       country_singup: ['', [Validators.required]],
     });
+
+    
 
     
     this.address={
@@ -75,11 +81,25 @@ export class PersonalManagementComponent implements OnInit {
       addresses:[]
     }
 
+    this.getCountry();
     
   }
 
 
   onChangeCountry(event){   
+    
+  }
+
+  getCountry(){
+    this.masterService.getCountries().subscribe(
+      res=>{
+        this.countries=res;
+        this.address.idCountry=32;
+      },
+      err=>{
+        console.log(err);
+      }
+    )
     
   }
 

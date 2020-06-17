@@ -14,10 +14,10 @@ export class SuccessProcessComponent implements OnInit {
   }
 
   onClickFinish(){
-    localStorage.setItem("persontmp","");
-    localStorage.setItem("policyholder","");
-    localStorage.setItem("vehicle","");
-    localStorage.setItem("insured","");
+    localStorage.removeItem("persontmp");
+    localStorage.removeItem("policyholder");
+    localStorage.removeItem("vehicle");
+    localStorage.removeItem("insured");
     this.router.navigate(['producto'])
   }
 

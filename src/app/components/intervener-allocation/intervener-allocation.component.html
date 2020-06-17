@@ -1,14 +1,25 @@
 <div class="container mt-4 bg-ligth">
     <div class="row justify-content-center">
-        <div class="shadow p-3 mb-5 bg-white rounded">
-            <form class="col-md-9" [formGroup]="intervenerForm">
-                <div *ngIf="type!='insured'" class="form-group row">
+        <div class="card mb-5 bg-white rounded">
+            <div class="card-header">
+              <div class="row align-items-center p-3">
+                <i class="fas fa-user text-primary mr-3"></i>
+                <h4>Datos persona</h4>
+              </div>
+              
+
+            </div>
+            <div class="card-body ">
+              <form class="p-3"  [formGroup]="intervenerForm">
+                <div class="form-group row">
                     <label for="staticEmail" 
                     
                     class="col-sm-4 col-form-label">Tomador es asegurado</label>
                     <div  class="col-sm-8 mt-2">
                         <label class="switch ">
-                            <input type="checkbox"  class="success" (change)="onChangeInsured($event)">
+                            <input type="checkbox"  class="success"
+                              id="insured_switch"
+                             (change)="onChangeInsured($event)">
                             <span class="slider round">
                             </span>
                         </label>
@@ -83,17 +94,16 @@
                     </div>
                 </div>                                                                                        
             </form> 
+            </div>          
+            <div class="card-footer">
+              <div class="row justify-content-between p-3">      
+                <button class="btn btn-outline-primary" (click)="onClickBack()">ATRAS</button>
+                <button class="btn btn-primary" (click)="onClickContinue()">CONTINUAR</button>                              
+            </div>
+            </div>
         </div>
         
     </div>
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <button class="btn btn-outline-primary" (click)="onClickBack()">ATRAS</button>
-            
-        </div>
-        <div class="col-md-6">
-          <button class="btn btn-primary" (click)="onClickContinue()">CONTINUAR</button>
-          
-      </div>
-    </div>
+   
+  
 </div> 

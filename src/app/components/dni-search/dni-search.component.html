@@ -14,6 +14,7 @@
                 
                     <input type="text" class="form-control" placeholder="DNI" 
                     formControlName="frm_dni"
+                    id="dni_search"
                     [(ngModel)]="identification.identification" >
                     <div class="input-group-append">
                     <span class="input-group-text">SEARCH</span>    
@@ -33,7 +34,7 @@
             <div class="d-flex justify-content-between bd-highlight">
                 
                 <button class="btn btn-outline-primary" (click)="onClickBack()">Atras</button>
-                <button class="btn btn-primary" (click)="onClickContinue()">Continuar</button>
+                <button id="search_button" class="btn btn-primary" (click)="onClickContinue()">Continuar</button>
             </div>
         </div>                
     </div>

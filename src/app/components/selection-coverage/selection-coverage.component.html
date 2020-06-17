@@ -11,20 +11,23 @@
             <div class="card-body">
                 <div class="row p-3">
                     <div class="col-md-12">
-                        <form>
+                        <form [formGroup]="coveringForm">
                             <div class="form-row mt-1">
                                <label class="col-md-4">Coberturas</label>
-                                <select class="form-control col-md-8">
+                                <select class="form-control col-md-8" formControlName="coverage" [(ngModel)]="policy.modality">
                                     <option *ngFor="let item of coverages" [value]="item.id">{{item.coverage}}</option>
                                 </select>
                             </div>                           
                              <div class="form-row mt-3">
                                 <label class="col-md-4">Fecha de efecto del seguro</label>
-                                 <input type="date" class="form-control col-md-7">
+                                 <input type="date" class="form-control col-md-7" 
+                                 [(ngModel)]="policy.effectiveDate" 
+                                 id="product_select" 
+                                 formControlName="dateInsured">
                              </div>
                              <div class="form-row mt-3">
                                 <label class="col-md-4">Frecuencia de pago</label>
-                                 <select class="form-control col-md-8">
+                                 <select class="form-control col-md-8" formControlName="frequency" [(ngModel)]="policy.frequency">
                                     <option value="1">Mensual</option>
                                     <option value="2">Bimestral</option>
                                     <option value="3">Trimestral</option>
@@ -36,8 +39,8 @@
                     </div>
                 </div>
                 <div class="row justify-content-between p-4">
-                    <button class="btn btn-outline-primary" (click)="onClickBack()" >Atras</button>
-                    <button class="btn btn-primary" (click)="onClickContinue()">Continuar</button>
+                    <button id="back_button" class="btn btn-outline-primary" (click)="onClickBack()" >Atras</button>
+                    <button id="next_button" class="btn btn-primary" (click)="onClickContinue()">Continuar</button>
                 </div>
             </div>
         </div>

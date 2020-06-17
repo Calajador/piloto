@@ -14,10 +14,11 @@ import { PolicyCalculationComponent } from './components/policy-calculation/poli
 import { AccountAdditionalComponent } from './components/account-additional/account-additional.component';
 import { SuccessProcessComponent } from './components/success-process/success-process.component';
 import { SummaryComponent } from './components/summary/summary.component';
+import { CreditCardComponent } from './components/credit-card/credit-card.component';
 
 
 const routes: Routes = [
-  {path:'',redirectTo:'login',pathMatch:'full'},
+  {path:'',redirectTo:'producto',pathMatch:'full'},
   { path: 'altapersona/:type', component: PersonalManagementComponent },
   { path: 'altavehiculo', component: VehicleManagementComponent },
   { 
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path: 'resumen', component: SummaryComponent },  
   { path: 'cuenta', component: AccountAdditionalComponent }, 
   { path: 'fincontratacion', component: PolicyCalculationComponent }, 
+  { path: 'tarjeta', component: CreditCardComponent }, 
   { path: 'asignacion/:type', component: IntervenerAllocationComponent },
   { path: 'regular/:type', component: RegularCustomerComponent },
   { path: 'login', component: LoginComponent },

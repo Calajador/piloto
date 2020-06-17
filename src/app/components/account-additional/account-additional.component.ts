@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
+import {Location} from '@angular/common';
 @Component({
   selector: 'app-account-additional',
   templateUrl: './account-additional.component.html',
@@ -10,7 +10,8 @@ export class AccountAdditionalComponent implements OnInit {
 
   switchAccount:boolean;
 
-  constructor(private router:Router) { }
+  constructor(private router:Router,
+    private _location: Location) { }
 
   ngOnInit(): void {
     this.switchAccount=false;
@@ -22,7 +23,7 @@ export class AccountAdditionalComponent implements OnInit {
 
   onClickContinue(){
     if(this.switchAccount){
-
+      this.router.navigate(['tarjeta'])
     }else{
       this.router.navigate(['finproceso'])
     }
@@ -30,7 +31,7 @@ export class AccountAdditionalComponent implements OnInit {
   }
 
   onClickBack(){
-    this.router.navigate(['fincontratacion'])
+    this._location.back();
   }
 
 }

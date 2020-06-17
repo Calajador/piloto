@@ -13,47 +13,61 @@
                     <form [formGroup]="vehicleForm" class="p-2">
                         <div class="form-row mt-1">
                             <label class="col-md-3">Matricula</label>
-                            <input type="text" [(ngModel)]="vehicle.plate" formControlName="car_registration_vr" class="form-control col-md-9" >
+                            <input type="text" [(ngModel)]="vehicle.plate" 
+                            formControlName="car_registration_vr" 
+                            id="car_registration_vr"
+                            class="form-control col-md-9" >
                         </div>
                         <div class="form-row mt-3">
                             <label class="col-md-3">Coste</label>
-                            <input type="number" [(ngModel)]="vehicle.price" formControlName="cost_vr" class="form-control col-md-9">
+                            <input type="number" [(ngModel)]="vehicle.price"
+                            id="cost_vr"
+                             formControlName="cost_vr" class="form-control col-md-9">
                         </div>
                         <div class="form-row mt-3">
                             <label class="col-md-3">KMs Actuales</label>
-                            <input type="number" [(ngModel)]="vehicle.currentKms" formControlName="current_km_vr" class="form-control col-md-3">
+                            <input type="number" [(ngModel)]="vehicle.currentKms" 
+                            id="current_km_vr"
+                            formControlName="current_km_vr" class="form-control col-md-3">
                             
                             
                             <label class="col-md-3">KMs Previstos</label>
-                            <input type="number" [(ngModel)]="vehicle.expectedKms" formControlName="provied_km_vr" class="form-control col-md-3">
+                            <input type="number" [(ngModel)]="vehicle.expectedKms" 
+                            id="provied_km_vr"
+                            formControlName="provied_km_vr" class="form-control col-md-3">
                          
                          
                         </div>
                         <div class="form-row mt-3">
                             <label class="col-md-3">Año vehiculo</label>
-                            <input type="number" [(ngModel)]="vehicle.year" formControlName="year_vr" class="form-control col-md-9">
+                            <input type="number" [(ngModel)]="vehicle.year"
+                            id="year_vr"
+                             formControlName="year_vr" class="form-control col-md-9">
                                
                            
                         </div>
                         <div class="form-row mt-3">
                             <label class="col-md-3">Marca</label>
-                            <select class="form-control col-md-9" [(ngModel)]="brandSelected" formControlName="mark_vr" (change)="onChangeBrand($event)" >
+                            <select class="form-control col-md-9" [(ngModel)]="brandSelected"
+                             formControlName="mark_vr" id="mark_vr" (change)="onChangeBrand($event,brandSelected)" >
                                 <option *ngFor="let item of brands" [value]="item.id">{{item.brand}}</option>
                             </select>
                     
                         </div>
                         <div class="form-row mt-3">
                             <label class="col-md-3">Modelo</label>
-                            <select class="form-control col-md-9" [(ngModel)]="modelSelected" formControlName="model_vr">
+                            <select class="form-control col-md-9" 
+                            [(ngModel)]="modelSelected" id="model_vr"
+                            formControlName="model_vr" (change)="onChangeModel($event,modelSelected)" >
                                 <option *ngFor="let item of vehicleModels" [value]="item.id">{{item.model}}</option>
                             </select>
                     
                         </div>
                         <div class="form-row mt-3">
                             <label class="col-md-3">Vérsion</label>
-                            <select class="form-control col-md-9" [(ngModel)]="versionModel" formControlName="version_vr">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
+                            <select class="form-control col-md-9" id="version_vr"
+                             [(ngModel)]="versionModel" formControlName="version_vr" (change)="onChangeVersion($event,versionModel)">
+                                <option *ngFor="let item of version" [value]="item.id">{{item.version}}</option> 
                             </select>
                     
                         </div>

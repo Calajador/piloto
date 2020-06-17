@@ -11,13 +11,19 @@ export class NavComponent implements OnInit {
   app_name:string;
   isLogged:boolean;
 
-  constructor(private auth:AuthService) { }
+  constructor(private auth:AuthService) {
+    this.auth.currentUser.subscribe(
+      res=>{
+        console.log(res);
+      }
+    );
+   }
 
   ngOnInit(): void {
   
     this.app_name="Itaca"
     
-    this.isLogged= this.auth.isLogged();
+    
     
   }
 

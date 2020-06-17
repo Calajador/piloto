@@ -25,6 +25,7 @@ import { AccountAdditionalComponent } from './components/account-additional/acco
 import { SuccessProcessComponent } from './components/success-process/success-process.component';
 import { SummaryComponent } from './components/summary/summary.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CreditCardComponent } from './components/credit-card/credit-card.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     PolicyCalculationComponent,
     AccountAdditionalComponent,
     SuccessProcessComponent,
-    SummaryComponent
+    SummaryComponent,
+    CreditCardComponent
     
   ],
   imports: [
