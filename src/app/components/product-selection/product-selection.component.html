@@ -8,9 +8,8 @@
                 </div>
                 <div class="card-body">
                     <div class="row p-4">                      
-                        <select class="form-control-lg col-md-12">
-                            <option>Producto</option>
-                            <option *ngFor=" let item of products" [value]="item.id">{{item.nombre}}</option>
+                        <select class="form-control-lg col-md-12">                            
+                            <option *ngFor=" let item of products" [value]="item.id">{{item.product}}</option>
                         </select>                      
                     </div>
                     <div class="row justify-content-between p-3">

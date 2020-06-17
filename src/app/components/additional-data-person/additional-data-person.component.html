@@ -1,0 +1,74 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 mt-4">
+            <div class="card">
+                <div class="card-header">
+                    <h4><b>Asignación intervenientes</b></h4>
+                    <span>Datos adicionales</span>
+                </div>
+                <div class="card-body">
+                    <div class="row justify-content-center p-3">
+                        <div class="col-md-12">
+                            <form [formGroup]="additionalForm">
+                                <div class="form-row mt-2">
+                                    <div class="col-md-3">
+                                        <label>Sexo</label>                                    
+                                    </div>
+                                    <div class="col-md-9">
+                                        <select class="form-control" formControlName="gender_intervening" 
+                                        [(ngModel)]="gender"
+                                        (change)="onChangeGender()">
+                                            <option value="M">Masculino</option>
+                                            <option value="F">Femenino</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row mt-3">
+                                    <div class="col-md-3">
+                                        <label>Tipo de carnet</label>                                    
+                                    </div>
+                                    <div class="col-md-9">
+                                        <select class="form-control" formControlName="licenses_intervening" 
+                                       
+                                        (change)="onChangeLicenses()">
+                                            <option value="8">B1</option>
+                                            <option value="9">B2</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row mt-3">
+                                    <div class="col-md-3">
+                                        <label>Número de licencia</label>                                    
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input class="form-control" formControlName="number_intervening" 
+                                        [(ngModel)]="number_int"
+                                        (change)="onChangeLicenses()">
+                                            
+                                    </div>
+                                </div>
+                                <div class="form-row mt-3">
+                                    <div class="col-md-3">
+                                        <label>Año obtención</label>                                    
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="date" class="form-control"
+                                        [(ngModel)]="obtaning"
+                                        formControlName="obtaning_intervening">
+                                    </div>
+                                </div>
+                                <div class="row justify-content-between mt-4 p-3">                                                                
+                                    <button class="btn btn-outline-primary col-md-3" (click)="onClickBack()">Atras</button>                                                                              
+                                    <button class="btn btn-primary col-md-3" (click)="onClickContinue()">Continuar</button>                                                                                                                                                      
+                                </div>
+                            </form>
+                        </div>
+                      
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+      
+    </div>
+</div>

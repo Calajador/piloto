@@ -1,3 +1,6 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "line-spin-fade" [fullScreen] = "true">
+    <p style="color: white" > Cargando... </p>
+</ngx-spinner>
 <div class="container mt-3">
    <div class="row justify-content-center">
        
@@ -62,16 +65,24 @@
                     <label class="col-md-3">Provincia</label>
                     <input class="form-control col-md-5" 
                     [(ngModel)]="address.province"
-                    formControlName="city_singup" type="text">     
+                    formControlName="city_singup" type="text">
+                      
                     <label class="col-md-2">Codigo postal</label>
-                    <input class="form-control col-md-2" 
-                    [(ngModel)]="address.postalCode"
-                    formControlName="postalcode_singup" type="text">     
+                    <div class="form-group col-md-2">
+                        <input class="form-control" 
+                        [ngClass]="{ 'is-invalid': submitted && f.postalcode_singup.errors}" type="text"
+                        [(ngModel)]="address.postalCode"
+                        formControlName="postalcode_singup" type="text">
+                        <div  *ngIf="submitted && f.date_singup.errors" class="col-md-10 text-center invalid-feedback">
+                            Porfavor digite un codigo de postal válido
+                        </div>   
+                    </div>
+                      
                 </div> 
                 <div class="form-row col-md-10 mt-3">       
                     <label class="col-md-3">Pais</label>
                     <select class="col-md-5" (change)="onChangeCountry($event)"  formControlName="country_singup" [(ngModel)]="address.idCountry" >
-                        <option value="32">España</option>
+                        <option value="32">Argentina</option>
                     </select>    
                 </div> 
             </form>            

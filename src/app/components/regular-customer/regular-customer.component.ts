@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-regular-customer',
@@ -9,13 +9,17 @@ import { Router } from '@angular/router';
 })
 export class RegularCustomerComponent implements OnInit {
 
-  constructor(private fb:FormBuilder,private router:Router) { }
+  constructor(private fb:FormBuilder,
+    private router:Router,
+    private _route:ActivatedRoute) { }
 
   regularPersonForm:any;
   isSubmitted = false;
+  type:string;
   personSelected:string;
 
   ngOnInit(): void {
+    this.type=this._route.snapshot.paramMap.get('type');
     this.personSelected="";
     this.regularPersonForm = this.fb.group({
       radio: ['', [Validators.required]]
@@ -37,9 +41,9 @@ export class RegularCustomerComponent implements OnInit {
 
   onClickContinue(){
     if(this.personSelected=="SI"){
-      this.router.navigate(['/dni']);
+      this.router.navigate(['/dni',this.type]);
     }else if(this.personSelected=="NO"){
-      this.router.navigate(['/altapersona']);
+      this.router.navigate(['/altapersona',this.type]);
     }
   }
 

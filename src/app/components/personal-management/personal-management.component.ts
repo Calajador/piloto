@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Person } from 'src/app/model/Person';
 import { Address } from 'src/app/model/Address';
 import { Identification } from 'src/app/model/Identification';
 import { PersonService } from 'src/app/services/person.service';
 import { DatePipe } from '@angular/common';
+import { Spinner } from 'ngx-spinner/lib/ngx-spinner.enum';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-personal-management',
@@ -17,16 +19,21 @@ export class PersonalManagementComponent implements OnInit {
   personForm:any;
   submitted:boolean;
   person:Person;
+  type:string;
   address:Address;
   identification:Identification;
 
   constructor(private router:Router,
     private formBuilder:FormBuilder,
     private datePipe: DatePipe,
+    private spinner:NgxSpinnerService,
+    private _route:ActivatedRoute,
     private personService:PersonService) { }
 
   ngOnInit(): void {
     this.submitted=false;
+    
+    this.type=this._route.snapshot.paramMap.get('type');
     this.personForm = this.formBuilder.group({
       name_singup: ['', [Validators.required]],
       surname_singup: ['', [Validators.required]],
@@ -36,7 +43,7 @@ export class PersonalManagementComponent implements OnInit {
       number_singup: [''],
       floor_singup: [''],
       city_singup: ['', [Validators.required]],
-      postalcode_singup: ['', [Validators.required]],
+      postalcode_singup: ['', [Validators.required,Validators.maxLength(4)]],
       country_singup: ['', [Validators.required]],
     });
 
@@ -68,17 +75,9 @@ export class PersonalManagementComponent implements OnInit {
       addresses:[]
     }
 
-    this.existPersonTmp();
-
     
   }
 
-  existPersonTmp(){
-    debugger;
-    if(localStorage.getItem("persontmp")!=""){
-      this.person=JSON.parse(localStorage.getItem("persontmp"));
-    }
-  }
 
   onChangeCountry(event){   
     
@@ -87,23 +86,34 @@ export class PersonalManagementComponent implements OnInit {
   get f() { return this.personForm.controls;}
 
   onClickContinue(){
-    this.submitted=true;       
+ 
+    this.submitted=true;  
+
     if(this.personForm.valid){
+      this.spinner.show();
       let idCountry=+this.address.idCountry      
       this.address.idCountry=idCountry;
       this.identification.idCountry=idCountry;
+      this.person.identifications=[];
+      this.person.addresses=[];
       this.person.dateBorn=this.format(this.person.dateBorn);
       this.person.identifications.push(this.identification);
       this.person.addresses.push(this.address);
       this.personService.createPerson(this.person).subscribe(
-        res=>{                     
-          localStorage.setItem("insured",res.id)
-          localStorage.setItem("policyholder",res.id) 
-          localStorage.setItem("persontmp",JSON.stringify(res));
-          this.router.navigate(['/asignacion'])  
+        res=>{     
+                       
+          if(this.type=='policy'){
+            localStorage.setItem("policyholder",res[0].id) 
+            this.router.navigate(['/asignacion','policy']) 
+          }else{
+            localStorage.setItem("insured",res.id)
+          }
+          
+          localStorage.setItem("persontmp",JSON.stringify(res[0]));
+          this.spinner.hide();
         },
         err=>{
-          debugger;
+          this.spinner.hide();
           console.log(err); 
         }
       )           
@@ -121,7 +131,7 @@ export class PersonalManagementComponent implements OnInit {
 
 
   onClickBack(){
-    this.router.navigate(['/regular']);
+    this.router.navigate(['/regular',this.type]);
   }
 
 

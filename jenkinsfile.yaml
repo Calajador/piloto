@@ -1,6 +1,6 @@
 pipelineConfiguration: 
   paas:
-    namespace: microservices
+    namespace: front
     clusterEnv:  RIVADAVIA_POC
     projectDescription: 
     urlRegistryDev: https://642711691858.dkr.ecr.eu-west-1.amazonaws.com
@@ -8,26 +8,27 @@ pipelineConfiguration:
     timeoutOperations: 1800 
     registryCredentialsId: ecr-rivadavia-apikey
     helm:
-      namespace: microservices
+      namespace: front
       name: rvdv-front
+      tier: frontend
       deployment:
         replicas: 1
         revisionHistoryLimit: 3
-        image: "642711691858.dkr.ecr.eu-west-1.amazonaws.com/rivadavia/rivadavia-nodejs-base"
-        version: "1.0"
+        image: "642711691858.dkr.ecr.eu-west-1.amazonaws.com/rivadavia/node-image"
+        version: "0.1"
         imagePullPolicy: Always
-        containerPort: 8888
+        containerPort: 80
         replicas: 1
         imagePullSecrets:
           name: ecr-rivadavia-apikey
       service:
-        targetPort: 8080
+        targetPort: 80
         type: LoadBalancer   
       env:
-        nodeConfigPort: 8080
+        nodeConfigPort: 80
         remoteRepositories: https://nexus.ust-global-spain.com/repository  
-        repositoryId: maven-snapshots
-        appGroupId: com.itaca.msa.front
+        repositoryId: devopspaas-npm-snapshots
+        appGroupId: itaca
         appArtifactId: itaca-0.0.0.tgz
   nodejs: 
     contextDir: ./
@@ -37,7 +38,7 @@ pipelineConfiguration:
   artifactory: 
     project: devopspaas-npm-snapshots
     apiNpm: ""
-    credential: devops-robot-ldap
+    credential: devops-robot
   custom: 
     inputParams: true
     inputParamsFile: ./customParameters.groovy

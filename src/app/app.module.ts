@@ -17,6 +17,15 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { DatePipe } from '@angular/common';
 
+import { AdditionalDataPersonComponent } from './components/additional-data-person/additional-data-person.component';
+import { VehicleManagementComponent } from './components/vehicle-management/vehicle-management.component';
+import { SelectionCoverageComponent } from './components/selection-coverage/selection-coverage.component';
+import { PolicyCalculationComponent } from './components/policy-calculation/policy-calculation.component';
+import { AccountAdditionalComponent } from './components/account-additional/account-additional.component';
+import { SuccessProcessComponent } from './components/success-process/success-process.component';
+import { SummaryComponent } from './components/summary/summary.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +35,14 @@ import { DatePipe } from '@angular/common';
     RegularCustomerComponent,
     PersonalManagementComponent,
     DniSearchComponent,
-    IntervenerAllocationComponent
+    IntervenerAllocationComponent,
+    AdditionalDataPersonComponent,
+    VehicleManagementComponent,
+    SelectionCoverageComponent,
+    PolicyCalculationComponent,
+    AccountAdditionalComponent,
+    SuccessProcessComponent,
+    SummaryComponent
     
   ],
   imports: [
@@ -37,7 +53,8 @@ import { DatePipe } from '@angular/common';
     NgxSpinnerModule,
     ReactiveFormsModule,
     FormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    NgbModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
