@@ -5,6 +5,7 @@ import { ApiSecret } from '../common/API/ApiSecret';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { OAuthRequest } from '../common/API/OAuthRequest';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Injectable({
@@ -19,7 +20,7 @@ export class AuthInterceptorService implements HttpInterceptor {
   
   
 
-  constructor(private auth:AuthService) {
+  constructor(private auth:AuthService,private toastr: ToastrService) {
     this.ban=false;
    }
 
@@ -36,6 +37,7 @@ export class AuthInterceptorService implements HttpInterceptor {
     let token=localStorage.getItem("token");
   
     request= request.clone({headers:request.headers.set('X-IBM-Client-Id',ApiSecret.client_id)})
+    request= request.clone({headers:request.headers.set('rejectUnauthorized','false')})
     if(token){
       if(!req.url.includes("oauth2")){
         request = request.clone({ headers: request.headers.set('Authorization', 'Bearer ' + token) });
@@ -52,8 +54,9 @@ export class AuthInterceptorService implements HttpInterceptor {
           this.failedRequest=request;                
             this.getToken(next); 
                              
-        }else{
-
+        }else if(err.status===400){
+          
+          this.toastr.error(err.message,"Error server 400")
         
         }
       

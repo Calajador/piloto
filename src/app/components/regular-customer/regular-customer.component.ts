@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-
+import {Location} from '@angular/common'
 @Component({
   selector: 'app-regular-customer',
   templateUrl: './regular-customer.component.html',
@@ -11,6 +11,7 @@ export class RegularCustomerComponent implements OnInit {
 
   constructor(private fb:FormBuilder,
     private router:Router,
+    private location:Location,
     private _route:ActivatedRoute) { }
 
   regularPersonForm:any;
@@ -48,7 +49,7 @@ export class RegularCustomerComponent implements OnInit {
   }
 
   onClickBack(){
-    this.router.navigate(['/producto']);
+    this.location.back();
   }
 
 }

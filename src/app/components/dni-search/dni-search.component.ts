@@ -51,7 +51,12 @@ export class DniSearchComponent implements OnInit {
       res=>{
         console.log(res) 
         if(res.identifications.length>0){
-          localStorage.setItem("persontmp",JSON.stringify(res));
+          if(this.type!='insured'){
+            localStorage.setItem("personinsured",JSON.stringify(res));
+          }else{
+            localStorage.setItem("personholder",JSON.stringify(res));
+          }
+         
           this.router.navigate(['/asignacion',this.type])
         }else{
           this.failure=true;
