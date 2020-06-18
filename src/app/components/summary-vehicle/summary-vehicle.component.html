@@ -1,0 +1,77 @@
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <div class="card">
+                <div class="card-header">
+                    <div class="p-2">
+                        <h4><b>Información vehiculo</b></h4>                         
+                    </div>
+     
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="vehicleForm" class="p-2">
+                        <div class="form-row mt-1">
+                            <label class="col-md-3">Matricula</label>
+                            <input readonly type="text" [(ngModel)]="vehicle.plate" 
+                            formControlName="car_registration_v" 
+                            id="car_registration_v"
+                            class="form-control col-md-9" >
+                        </div>
+                        <div class="form-row mt-3">
+                            <label class="col-md-3">Coste</label>
+                            <input readonly type="number" [(ngModel)]="vehicle.price"
+                            id="cost_v"
+                             formControlName="cost_v" class="form-control col-md-9">
+                        </div>
+                        <div class="form-row mt-3">
+                            <label class="col-md-3">KMs Actuales</label>
+                            <input readonly type="number" [(ngModel)]="vehicle.currentKms" 
+                            id="current_km_v"
+                            formControlName="current_km_v" class="form-control col-md-3">
+                            
+                            
+                            <label class="col-md-3">KMs Previstos</label>
+                            <input readonly type="number" [(ngModel)]="vehicle.expectedKms" 
+                            id="provied_km_v"
+                            formControlName="provied_km_v" class="form-control col-md-3">
+                         
+                         
+                        </div>
+                        <div class="form-row mt-3">
+                            <label class="col-md-3">Año vehiculo</label>
+                            <input readonly type="number" [(ngModel)]="vehicle.year"
+                            id="year_v"
+                             formControlName="year_v" class="form-control col-md-9">
+                               
+                           
+                        </div>
+                        <div class="form-row mt-3">
+                            <label class="col-md-3">Marca</label>
+                            <input readonly class="form-control col-md-9" [(ngModel)]="vehicle.brand"
+                             formControlName="mark_v" id="mark_v">
+                            
+                    
+                        </div>
+                        <div class="form-row mt-3">
+                            <label class="col-md-3">Modelo</label>
+                            <input readonly class="form-control col-md-9" 
+                            [(ngModel)]="vehicle.model" id="model_v"
+                            formControlName="model_v"  >
+                               
+                    
+                        </div>
+                        <div class="form-row mt-3">
+                            <label class="col-md-3">Vérsion</label>
+                            <input readonly class="form-control col-md-9" id="version_v"
+                             [(ngModel)]="vehicle.versionText" formControlName="version_v" >
+                           
+                    
+                        </div>
+                      
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
