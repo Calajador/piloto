@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
+import {Location} from '@angular/common'
 @Component({
   selector: 'app-credit-card',
   templateUrl: './credit-card.component.html',
@@ -14,7 +15,8 @@ export class CreditCardComponent implements OnInit {
 
   
 
-  constructor() { }
+  constructor(private router:Router,
+    private location:Location) { }
 
   ngOnInit(): void {
     this.visa=false;
@@ -26,6 +28,14 @@ export class CreditCardComponent implements OnInit {
 
   validateCard(){
     //algoritmo de luhn
+  }
+
+  onClickPay(){
+    this.router.navigate(['finproceso'])
+  }
+
+  onClickBack(){
+    this.location.back()
   }
 
   typeCard(){

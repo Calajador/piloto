@@ -11,7 +11,7 @@
             </div>
             <div class="card-body ">
               <form class="p-3"  [formGroup]="intervenerForm">
-                <div class="form-group row">
+                <div class="form-group row" *ngIf="type!='insured'">
                     <label for="staticEmail" 
                     
                     class="col-sm-4 col-form-label">Tomador es asegurado</label>

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Person } from 'src/app/model/Person';
 import { FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import {Location} from '@angular/common';
+import { IfStmt } from '@angular/compiler';
 @Component({
   selector: 'app-intervener-allocation',
   templateUrl: './intervener-allocation.component.html',
@@ -16,6 +17,8 @@ export class IntervenerAllocationComponent implements OnInit {
 
   intervenerForm:any;
 
+  @Input('summaryType')
+  summaryType: string;
 
   constructor(private formBuilder:FormBuilder,
     private _route:ActivatedRoute,
@@ -23,11 +26,11 @@ export class IntervenerAllocationComponent implements OnInit {
     private router:Router) { }
 
   ngOnInit(): void {
-  
+   
     this.type=this._route.snapshot.paramMap.get('type');
     this.switchInsured=false;
 
-    
+ 
     this.person={
       firstName:"",
       lastName:"",
@@ -52,6 +55,7 @@ export class IntervenerAllocationComponent implements OnInit {
       inter_codepostal:[this.person.addresses[0].postalCode],
       inter_country:[this.person.addresses[0].idCountry]
     })
+   
   }
 
   onChangeInsured(event){
@@ -59,9 +63,54 @@ export class IntervenerAllocationComponent implements OnInit {
   }
 
 
+
+
   setValuePerson(){
-    if(this.person)    
-    this.person=JSON.parse(localStorage.getItem("persontmp"));
+    
+    var tmp='';
+
+    if(this.summaryType){ 
+        if(this.summaryType!='policy'){
+          tmp=localStorage.getItem("personinsured")
+        }else{
+          tmp=localStorage.getItem("personholder");        
+        }
+    }else{
+      if(this.type!='insured'){
+        tmp=localStorage.getItem("personholder");
+      }else{
+        tmp=localStorage.getItem("personinsured")
+      }
+    }
+  
+    
+    if(tmp){
+      this.person=JSON.parse(tmp);      
+    }
+
+    if(this.person.identifications.length==0){
+      this.person.identifications.push(
+        {
+          idCountry:0,
+          identification:'',
+          type:'DOCUMENTO_NACIONAL_IDENTIDAD'
+        }
+      )
+    }
+
+    if(this.person.addresses.length==0){
+      this.person.addresses.push(
+        {
+          floor:0,
+          idCountry:0,
+          number:0,
+          postalCode:'',
+          province:'',
+          street:''
+        }
+      )
+    }
+   
     console.log(this.person);
   }
 
@@ -71,11 +120,14 @@ export class IntervenerAllocationComponent implements OnInit {
       if(this.switchInsured){
         localStorage.setItem("insured",this.person.id);
         localStorage.setItem("policy",this.person.id);
+        localStorage.setItem("personinsured",JSON.stringify(this.person))
+        localStorage.setItem("personholder",JSON.stringify(this.person))
         this.router.navigate(['/adicional'])      
       }else{
         this.router.navigate(['/regular','insured'])
       }
     }else{
+      localStorage.setItem("personinsured",JSON.stringify(this.person));
       localStorage.setItem("insured",this.person.id);
       this.router.navigate(['/adicional'])  
     }

@@ -124,12 +124,15 @@ export class PersonalManagementComponent implements OnInit {
                        
           if(this.type=='policy'){
             localStorage.setItem("policyholder",res[0].id) 
+            localStorage.setItem("personholder",JSON.stringify(res[0]));
             this.router.navigate(['/asignacion','policy']) 
+            
           }else{
+            localStorage.setItem("personinsured",JSON.stringify(res[0]));
             localStorage.setItem("insured",res.id)
           }
           
-          localStorage.setItem("persontmp",JSON.stringify(res[0]));
+        
           this.spinner.hide();
         },
         err=>{

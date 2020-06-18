@@ -30,7 +30,7 @@ const routes: Routes = [
   { path: 'adicional', component: AdditionalDataPersonComponent },
   { path: 'finproceso', component: SuccessProcessComponent },
   { path: 'coberturas', component: SelectionCoverageComponent }, 
-  { path: 'resumen', component: SummaryComponent },  
+  { path: 'resumen/:type', component: SummaryComponent },  
   { path: 'cuenta', component: AccountAdditionalComponent }, 
   { path: 'fincontratacion', component: PolicyCalculationComponent }, 
   { path: 'tarjeta', component: CreditCardComponent }, 

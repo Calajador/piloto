@@ -16,7 +16,8 @@ import { IntervenerAllocationComponent } from './components/intervener-allocatio
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { DatePipe } from '@angular/common';
-
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdditionalDataPersonComponent } from './components/additional-data-person/additional-data-person.component';
 import { VehicleManagementComponent } from './components/vehicle-management/vehicle-management.component';
 import { SelectionCoverageComponent } from './components/selection-coverage/selection-coverage.component';
@@ -26,6 +27,8 @@ import { SuccessProcessComponent } from './components/success-process/success-pr
 import { SummaryComponent } from './components/summary/summary.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CreditCardComponent } from './components/credit-card/credit-card.component';
+import { SummaryVehicleComponent } from './components/summary-vehicle/summary-vehicle.component';
+import { SummaryInsuredComponent } from './components/summary-insured/summary-insured.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +47,9 @@ import { CreditCardComponent } from './components/credit-card/credit-card.compon
     AccountAdditionalComponent,
     SuccessProcessComponent,
     SummaryComponent,
-    CreditCardComponent
+    CreditCardComponent,
+    SummaryVehicleComponent,
+    SummaryInsuredComponent
     
   ],
   imports: [
@@ -53,6 +58,8 @@ import { CreditCardComponent } from './components/credit-card/credit-card.compon
     ReactiveFormsModule,
     AppRoutingModule,
     NgxSpinnerModule,
+    ToastrModule.forRoot() ,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
     FontAwesomeModule,

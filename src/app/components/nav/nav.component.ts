@@ -10,10 +10,12 @@ export class NavComponent implements OnInit {
 
   app_name:string;
   isLogged:boolean;
+  userName:string;
 
   constructor(private auth:AuthService) {
     this.auth.currentUser.subscribe(
       res=>{
+        this.userName=res;
         console.log(res);
       }
     );

@@ -31,8 +31,8 @@ export class AuthService {
 }
 
   isLogged():boolean{
-    var session=localStorage.getItem('session');
-    if(session==="true"){
+    var session=localStorage.getItem('username');
+    if(session!=""){
       return true;
     }else{
       return false;
@@ -40,7 +40,7 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem('session');
+    localStorage.removeItem('username');
     this.currentUserSubject.next(null);
     this.router.navigate(['/login']);
   }

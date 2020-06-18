@@ -1,8 +1,8 @@
 
-  <nav *ngIf="isLogged" class="navbar navbar-expand-lg navbar-dark bg-primary justify-content-between">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary justify-content-between">
     <a class="navbar-brand">{{app_name}}</a>
     <div class="form-inline my-2 my-lg-0">
-     
-      <button class="btn btn-outline-white my-2 my-sm-0" (click)="onClickLogout()">Salir</button>
+      <span>{{userName}}</span>
+      <button *ngIf="userName" class="btn btn-outline-white my-2 my-sm-0" (click)="onClickLogout()">Salir</button>
     </div>
   </nav>

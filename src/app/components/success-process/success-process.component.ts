@@ -14,7 +14,8 @@ export class SuccessProcessComponent implements OnInit {
   }
 
   onClickFinish(){
-    localStorage.removeItem("persontmp");
+    localStorage.removeItem("personholder");
+    localStorage.removeItem("personinsured");
     localStorage.removeItem("policyholder");
     localStorage.removeItem("vehicle");
     localStorage.removeItem("insured");

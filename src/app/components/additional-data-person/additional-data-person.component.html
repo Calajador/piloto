@@ -21,6 +21,7 @@
                                         (change)="onChangeGender()">
                                             <option value="M">Masculino</option>
                                             <option value="F">Femenino</option>
+                                            <option value="ND">No definido</option>
                                         </select>
                                     </div>
                                 </div>
@@ -31,7 +32,9 @@
                                     <div class="col-md-9">
                                         <select class="form-control" formControlName="licenses_intervening" 
                                         id="license_type"
+                                        [(ngModel)]="type_license"
                                         (change)="onChangeLicenses()">
+                                            <option value="0" selected>Seleccione un carnet</option>
                                             <option value="8">B1</option>
                                             <option value="9">B2</option>
                                         </select>

@@ -61,6 +61,7 @@ export class VehicleManagementComponent implements OnInit {
     this.modelSelected=0;
     this.getBrands();
   }
+  
 
   getBrands(){
     this.vehicleService.getBrands().subscribe(

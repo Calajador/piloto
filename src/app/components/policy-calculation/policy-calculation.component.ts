@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CalculateInsured } from 'src/app/model/CalculateInsured';
 import { PolicyService } from 'src/app/services/policy.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Policy } from 'src/app/model/Policy';
 
 @Component({
   selector: 'app-policy-calculation',
@@ -13,6 +14,7 @@ export class PolicyCalculationComponent implements OnInit {
 
   calculatePolicy:CalculateInsured;
   price:number;
+  policy:Policy;
   dateEffect:string;
 
   constructor(private router:Router,
@@ -27,7 +29,7 @@ export class PolicyCalculationComponent implements OnInit {
     
     let vehicle=this.getInfoVehicle();
     if(vehicle){
-      let policy=JSON.parse(localStorage.getItem("policy"));
+       this.policy=JSON.parse(localStorage.getItem("policy"));
       this.calculatePolicy={
         brand:vehicle.brand,
         cost:vehicle.price,
@@ -37,17 +39,18 @@ export class PolicyCalculationComponent implements OnInit {
         vehicleKilometers:vehicle.currentKms,
         expectedKilometers:vehicle.expectedKms,
         yearVehicle:vehicle.year,
-        idModality:policy.modality,
-        idProduct:2,
-        paymentFrequency:policy.frequency
+        idModality:this.policy.modality,
+        idProduct:2,//cambiar id producto
+        paymentFrequency:this.policy.frequency
 
 
       }
-      this.dateEffect=policy.effectiveDate;
+      this.dateEffect=this.policy.effectiveDate;
       this.spinner.show();
       this.policyService.calculatePrice(this.calculatePolicy).subscribe(
         res=>{
           this.price=res.totalPrice
+          this.policy.price=this.price;
           this.spinner.hide();
         },
         err=>{
@@ -57,7 +60,7 @@ export class PolicyCalculationComponent implements OnInit {
       )
 
     }else{
-      alert("Error en el registro de la información del vehiculo, porfavor diligencie los datos nuevamente")
+     // alert("Error en el registro de la información del vehiculo, porfavor diligencie los datos nuevamente")
     }
   }
 

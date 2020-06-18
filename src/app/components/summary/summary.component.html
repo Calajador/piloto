@@ -1,28 +1,42 @@
 <div class="container">
-    <div class="row">
-
-        <nav>
-            <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Project Tab 1</a>
-                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Project Tab 2</a>
-                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Project Tab 3</a>
-            </div>
-        </nav>
-     
+    <div class="row justify-content-between mb-4 mt-3">
+      <h1>Resumen</h1>
+      <button class="btn btn-primary col-md-2" (click)="onClickConfirm()">Confimar</button>
+    </div>     
+    
+      
+    <ngb-tabset [destroyOnHide]="false">
+      
+      <ngb-tab title="Tomador">
+        <ng-template ngbTabContent>
+            <app-intervener-allocation [summaryType]='policy' ></app-intervener-allocation>
+        </ng-template>
+      </ngb-tab>
+       
+      <ngb-tab>
+        <ng-template ngbTabTitle>Asegurado</ng-template>
+        <ng-template ngbTabContent> 
+          <app-summary-insured  ></app-summary-insured>
+        </ng-template>
+      </ngb-tab>
+       
+      <ngb-tab>
+        <ng-template ngbTabTitle>Vehiculo</ng-template>
+        <ng-template ngbTabContent>
+            <app-summary-vehicle></app-summary-vehicle>
+        </ng-template>
+      </ngb-tab>
+       
+      <ngb-tab>
+        <ng-template ngbTabTitle>Oferta</ng-template>
+        <ng-template ngbTabContent>
+           <app-policy-calculation></app-policy-calculation>
+        </ng-template>
+      </ngb-tab>
+       
+    </ngb-tabset>
+    <div class="row justify-content-between">
+      <button>Atras</button>
+  
     </div>
-    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-        <ng-container>
-            <app-intervener-allocation></app-intervener-allocation>
-        </ng-container>
-     </div>
-     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-        <ng-container>
-            <app-intervener-allocation></app-intervener-allocation>
-        </ng-container>
-      </div>
-      <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-        <ng-container>
-           <app-vehicle-management></app-vehicle-management>
-        </ng-container>
-      </div>
 </div>
