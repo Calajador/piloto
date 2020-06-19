@@ -11,7 +11,7 @@
             </div>
             <div class="card-body ">
               <form class="p-3"  [formGroup]="intervenerForm">
-                <div class="form-group row" *ngIf="type!='insured'">
+                <div class="form-group row" *ngIf="type=='policy'">
                     <label for="staticEmail" 
                     
                     class="col-sm-4 col-form-label">Tomador es asegurado</label>
@@ -95,7 +95,7 @@
                 </div>                                                                                        
             </form> 
             </div>          
-            <div class="card-footer">
+            <div class="card-footer" *ngIf="type=='insured' || type=='policy'">
               <div class="row justify-content-between p-3">      
                 <button class="btn btn-outline-primary" (click)="onClickBack()">ATRAS</button>
                 <button class="btn btn-primary" (click)="onClickContinue()">CONTINUAR</button>                              

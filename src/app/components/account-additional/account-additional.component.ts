@@ -24,8 +24,8 @@ export class AccountAdditionalComponent implements OnInit {
     this.account=0;
     this.payment={
       account:"",
-      firstPayCreditCard:false,
-      type:"0"
+      firstPayCreditCard:"false",
+      type:"DOMICILIACION_BANCARIA"
     }
     this.accountForm=this.formBuilder.group(
       {
@@ -45,10 +45,14 @@ export class AccountAdditionalComponent implements OnInit {
 
     if(this.account!=0){    
       this.payment.account=this.account.toString();
-      this.payment.firstPayCreditCard=this.switchAccount;
-      this.payment.type="1"//camcbiar al correcto(preguntar);
+      if(this.switchAccount){
+        this.payment.firstPayCreditCard="true"; 
+      }else{
+        this.payment.firstPayCreditCard="false";
+      }         
       localStorage.setItem("payment",JSON.stringify(this.payment));
       if(this.switchAccount){ 
+        
         this.router.navigate(['resumen/credit']) 
         
         //this.router.navigate(['tarjeta'])

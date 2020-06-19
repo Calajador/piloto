@@ -35,8 +35,7 @@
                                         [(ngModel)]="type_license"
                                         (change)="onChangeLicenses()">
                                             <option value="0" selected>Seleccione un carnet</option>
-                                            <option value="8">B1</option>
-                                            <option value="9">B2</option>
+                                            <option *ngFor="let item of licenses" [value]="item.id">{{item.tipo}}</option>
                                         </select>
                                     </div>
                                 </div>

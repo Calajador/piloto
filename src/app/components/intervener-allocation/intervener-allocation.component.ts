@@ -26,7 +26,7 @@ export class IntervenerAllocationComponent implements OnInit {
     private router:Router) { }
 
   ngOnInit(): void {
-   
+    
     this.type=this._route.snapshot.paramMap.get('type');
     this.switchInsured=false;
 

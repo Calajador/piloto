@@ -30,7 +30,8 @@ export class ProductSelectionComponent implements OnInit {
         this.products=res
       },
       err=>{
-        console.log(err);
+        
+       
       }
     )
     ;

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PolicyProcess } from 'src/app/model/PolicyProcess';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PolicyService } from 'src/app/services/policy.service';
 
 @Component({
   selector: 'app-summary',
@@ -12,7 +13,9 @@ export class SummaryComponent implements OnInit {
   policy:PolicyProcess;
   type:string;
 
-  constructor(private _route:ActivatedRoute,private router:Router) { }
+  constructor(private _route:ActivatedRoute,
+    private policyService:PolicyService,
+    private router:Router) { }
 
   ngOnInit(): void {
     this.type=this._route.snapshot.paramMap.get('type');
@@ -29,13 +32,22 @@ export class SummaryComponent implements OnInit {
       vehicle:JSON.parse(localStorage.getItem("vehicle"))
     }
 
-    
 
-    if(this.type=='credit'){
-      this.router.navigate(['tarjeta'])
-    }else{
-      this.router.navigate(['finproceso'])
-    }
+    this.policyService.generatePolicy(this.policy).subscribe(
+      res=>{
+        console.log(res);
+        if(this.type=='credit'){
+          this.router.navigate(['tarjeta',res.id])
+        }else{
+          this.router.navigate(['finproceso'])
+        }
+      },
+      err=>{
+        console.log(err);
+      }
+    )
+
+   
   
   }
 

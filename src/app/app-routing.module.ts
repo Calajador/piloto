@@ -33,7 +33,7 @@ const routes: Routes = [
   { path: 'resumen/:type', component: SummaryComponent },  
   { path: 'cuenta', component: AccountAdditionalComponent }, 
   { path: 'fincontratacion', component: PolicyCalculationComponent }, 
-  { path: 'tarjeta', component: CreditCardComponent }, 
+  { path: 'tarjeta/:id', component: CreditCardComponent }, 
   { path: 'asignacion/:type', component: IntervenerAllocationComponent },
   { path: 'regular/:type', component: RegularCustomerComponent },
   { path: 'login', component: LoginComponent },

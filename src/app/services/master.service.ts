@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Country } from '../model/Country';
 import { Constants } from '../common/Constants';
 import { DrivingLicense } from '../model/DrivingLicense';
+import { License } from '../model/License';
 const httpOptions = {headers: new HttpHeaders({'Content-Type': 'application/json' })};
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class MasterService {
   }
 
   getDrivingLicenses(){
-    return this.http.get<DrivingLicense[]>(Constants.UrlApis.GET_DRIVING_LICENSES,httpOptions);
+    return this.http.get<License[]>(Constants.UrlApis.GET_DRIVING_LICENSES,httpOptions);
   }
 
 

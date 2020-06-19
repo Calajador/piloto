@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import {Location} from '@angular/common'
+import { FormBuilder, Validators } from '@angular/forms';
+import { CreditCard } from 'src/app/model/CreditCard';
+import { PolicyService } from 'src/app/services/policy.service';
 @Component({
   selector: 'app-credit-card',
   templateUrl: './credit-card.component.html',
@@ -12,15 +15,37 @@ export class CreditCardComponent implements OnInit {
   mastercard:boolean;
   american:boolean;
   card:string;
+  name:string;
+  cvv:string;
+  month:string;
+  year:string;
+  typeCard:string;
+  formCredit:any;
+  id:number;
 
   
 
   constructor(private router:Router,
+    private _route:ActivatedRoute,
+    private policyService:PolicyService,
+    private formBuilder:FormBuilder,
     private location:Location) { }
 
   ngOnInit(): void {
+    this.id=+this._route.snapshot.paramMap.get('id');
+    this.formCredit=this.formBuilder.group({
+      cardHolder:['',Validators.required],
+      numcard:['',Validators.required],
+      yearcard:['',Validators.required],
+      cvv_card:['',Validators.required],  
+      monthcard:['',Validators.required]
+    })
     this.visa=false;
     this.mastercard=false;
+    this.cvv="";
+    this.name="";
+    this.month="";
+    this.year="";
     this.card=""; 
     this.american=false;;
   }
@@ -31,14 +56,36 @@ export class CreditCardComponent implements OnInit {
   }
 
   onClickPay(){
-    this.router.navigate(['finproceso'])
+    let credit:CreditCard;
+
+
+    if(this.formCredit.valid){
+      credit={
+        cvv:this.cvv,
+        idPolicy:this.id,
+        month:this.month,
+        name:this.name,
+        number:this.card,
+        year:this.year
+      }
+      this.policyService.payCreditCard(credit).subscribe(
+        res=>{
+          this.router.navigate(['finproceso'])
+        },
+        err=>{
+          console.log(err);
+        }
+      )
+     
+    }
+    
   }
 
   onClickBack(){
     this.location.back()
   }
 
-  typeCard(){
+  validateTypeCard(){
     
     var visaRegEx = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
     var mastercardRegEx = /^(?:5[1-5][0-9]{14})$/;
@@ -65,7 +112,7 @@ export class CreditCardComponent implements OnInit {
 
   onKeyDownCard(){
 
-    this.typeCard();
+    this.validateTypeCard();
   }
 
 }

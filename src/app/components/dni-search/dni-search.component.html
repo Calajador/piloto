@@ -17,7 +17,7 @@
                     id="dni_search"
                     [(ngModel)]="identification.identification" >
                     <div class="input-group-append">
-                    <span class="input-group-text">SEARCH</span>    
+                    <button class="btn btn-secondary" (click)="onClickContinue()">SEARCH</button>  
                     </div>
                
               </div>  
@@ -38,11 +38,7 @@
             </div>
         </div>                
     </div>
-    <div class="row flex-row-reverse">
-        
-            <button class="btn btn-danger float-rigth" >Abandonar</button>
-       
-    </div>
+
 
 </div>
 </form>

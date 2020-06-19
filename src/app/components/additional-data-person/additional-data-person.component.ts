@@ -6,6 +6,8 @@ import { DrivingLicense } from 'src/app/model/DrivingLicense';
 import {Location} from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
+import { MasterService } from 'src/app/services/master.service';
+import { License } from 'src/app/model/License';
 
 @Component({
   selector: 'app-additional-data-person',
@@ -16,6 +18,7 @@ export class AdditionalDataPersonComponent implements OnInit {
 
   person:Person;
   drivingLicenses:DrivingLicense;
+  licenses:License[];
   gender:string;
   obtaning:string;
   lincense:number;
@@ -25,6 +28,7 @@ export class AdditionalDataPersonComponent implements OnInit {
   constructor(private personService:PersonService,
     private datePipe: DatePipe,
     private router:Router,
+    private masterService:MasterService,
     private _location: Location,
     private formBuilder:FormBuilder) { }
 
@@ -49,11 +53,22 @@ export class AdditionalDataPersonComponent implements OnInit {
     this.additionalForm=this.formBuilder.group({
       licenses_intervening:['',Validators.required],
       number_intervening:['',Validators.required],
-      obtaning_intervening:['',Validators.required],
+      obtaning_intervening:['30-12-2007',Validators.required],
       gender_intervening:['',Validators.required]
     })
-
+    this.getDrivingLicenses();
     this.setValueAdditionalData();
+  }
+
+  getDrivingLicenses(){
+    this.masterService.getDrivingLicenses().subscribe(
+      res=>{
+        this.licenses=res;
+      },
+      err=>{
+        console.log(err);
+      }
+    )
   }
 
   formAdd(){
@@ -102,6 +117,7 @@ export class AdditionalDataPersonComponent implements OnInit {
       this.drivingLicenses=person.drivingLicenses[0];
       this.number_int=this.drivingLicenses.numberLicense;
       this.type_license=this.drivingLicenses.type;
+      this.yesterdayDateFilter();
       this.gender=person.gender;
     }
   }
@@ -114,6 +130,14 @@ export class AdditionalDataPersonComponent implements OnInit {
     const dateSendingToServer = this.datePipe.transform(date, 'dd-MM-yyyy')
     return dateSendingToServer
   }
+
+  yesterdayDateFilter(){        
+    let yesterday = new Date();
+    yesterday.setDate(yesterday.getDate()-1);
+    this.obtaning = this.datePipe.transform(yesterday, 'yyyy-MM-dd');
+ 
+  
+ }
 
 
 

@@ -6,12 +6,12 @@
                     <h2>Tarjeta de credito</h2>
                 </div>
                 <div class="card-body">
-                    <form>
+                    <form [formGroup]="formCredit">
                         <div class="form-group">
                             <div class="form-group">
                                 <label>Titular</label>
-                                <input type="text" class="form-control" id="client_name_card" aria-describedby="emailHelp">
-                                <small id="emailHelp" class="form-text text-muted">Nombre y apellidos del titular de la cuenta</small>
+                                <input type="text" [(ngModel)]="name" class="form-control" id="client_name_card" formControlName="cardHolder" aria-describedby="client_name_card">
+                                <small id="client_name_card" class="form-text text-muted">Nombre y apellidos del titular de la cuenta</small>
                             </div>
                             <div class="form-row">
                                 <div *ngIf="mastercard || visa || american" class="align-items-center my-auto col-md-1">
@@ -22,8 +22,9 @@
                                 <div class="form-group col-md-11">
                                     <label>Número de tarjeta</label>
                                     
-                                    <input type="number" class="form-control" [(ngModel)]="card" 
+                                    <input type="text" class="form-control" [(ngModel)]="card" 
                                     name="numcard"
+                                    formControlName="numcard"
                                     id="card_number"
                                     (change)="onKeyDownCard()">
                                     
@@ -34,17 +35,18 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label>Año</label>
-                                    <select class="form-control" id="year_card">
-                                        <option value="2020">2020</option>                              
-                                        <option value="2021">2021</option>
-                                        <option value="2022">2022</option>
-                                        <option value="2023">2023</option>
+                                    <select class="form-control" id="year_card"  formControlName="yearcard" [(ngModel)]="year">
+                                        <option value="20">2020</option>                              
+                                        <option value="21">2021</option>
+                                        <option value="22">2022</option>
+                                        <option value="23">2023</option>
+                                        <option value="24">2024</option>
                                     </select>
                            
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Mes</label>
-                                    <select class="form-control" id="month_card">
+                                    <select class="form-control" id="month_card" formControlName="monthcard" [(ngModel)]="month">
                                         <option value="1">Enero</option>                              
                                         <option value="2">Febrero</option>
                                         <option value="3">Marzo</option>
@@ -64,7 +66,7 @@
                            <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label>CVV</label>
-                                    <input id="cvv_card" type="text" class="form-control"  aria-describedby="emailHelp">
+                                    <input id="cvv_card" type="text" formControlName="cvv_card" class="form-control" [(ngModel)]="cvv"  aria-describedby="emailHelp">
                                     <small  class="form-text text-muted">Se encuentra en la parte inferior al número de su tarjeta</small>
                                 </div>
                            </div>

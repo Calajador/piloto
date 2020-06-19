@@ -18,11 +18,13 @@ export class VehicleManagementComponent implements OnInit {
   vehicle:Vehicle;
   versionModel:number;
   modelText:string;
+  submitted:boolean;
   brandText:string;
   versionText:string;
   version:VersionVehicle[];
   modelSelected:number;
   brands:Brand[];
+
   vehicleModels:VehicleModel[];
   vehicleForm:any;
   brandSelected:number;
@@ -34,6 +36,8 @@ export class VehicleManagementComponent implements OnInit {
 
   ngOnInit(): void {
 
+    let plateRegex = '^([aA-zZ]{2}[0-9]{3}[aA-zZ]{2})|([aA-zZ]{1}[0-9]{3}[aA-zZ]{3})$';
+    this.submitted=false;
     this.vehicle={
       year:2020,
       currentKms:0,
@@ -44,7 +48,7 @@ export class VehicleManagementComponent implements OnInit {
     }
 
     this.vehicleForm=this.formBuilder.group({
-      car_registration_vr:['',Validators.required],
+      car_registration_vr:['',[Validators.required,Validators.pattern(plateRegex)]],
       cost_vr:['',Validators.required],
       current_km_vr:['',Validators.required],
       provied_km_vr:['',Validators.required],
@@ -61,6 +65,8 @@ export class VehicleManagementComponent implements OnInit {
     this.modelSelected=0;
     this.getBrands();
   }
+
+  get f() { return this.vehicleForm.controls;}
   
 
   getBrands(){
@@ -129,7 +135,6 @@ export class VehicleManagementComponent implements OnInit {
   }
 
   onChangeVersion(event,versionId){
-    this.getVersion(this.modelSelected,this.brandSelected)
     this.setSelectedVersionText(versionId);
   }
 
@@ -147,7 +152,7 @@ export class VehicleManagementComponent implements OnInit {
   
 
   onClickContinue(){
-    
+    this.submitted=true;  
     console.log(this.vehicle);
     if(this.vehicleForm.valid){      
       this.vehicle.brand=this.brandText;
