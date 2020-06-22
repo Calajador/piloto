@@ -1,4 +1,6 @@
 export interface CalculateInsured{
+    policyHolder: number;
+    insured: number;
     idModality: number;
     idProduct: number;
     paymentFrequency: number;
@@ -8,5 +10,4 @@ export interface CalculateInsured{
     yearVehicle: number;
     vehicleKilometers: number;
     expectedKilometers: number;
-
 }
