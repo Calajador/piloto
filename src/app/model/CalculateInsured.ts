@@ -2,9 +2,7 @@ export interface CalculateInsured{
     idModality: number;
     idProduct: number;
     paymentFrequency: number;
-    version: string;
-    brand: string;
-    model: string;
+    idVersion: number;
     numberPlate: string;
     cost: number;
     yearVehicle: number;

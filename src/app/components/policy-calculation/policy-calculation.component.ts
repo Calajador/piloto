@@ -31,10 +31,8 @@ export class PolicyCalculationComponent implements OnInit {
     if(vehicle){
        this.policy=JSON.parse(localStorage.getItem("policy"));
       this.calculatePolicy={
-        brand:vehicle.brand,
         cost:vehicle.price,
-        model:vehicle.model,
-        version:vehicle.versionText,
+        idVersion:vehicle.versionModel,
         numberPlate:vehicle.plate,
         vehicleKilometers:vehicle.currentKms,
         expectedKilometers:vehicle.expectedKms,
