@@ -18,22 +18,22 @@ import { CreditCardComponent } from './components/credit-card/credit-card.compon
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'producto', pathMatch: 'full'},
+  {path:'',redirectTo:'producto',pathMatch:'full'},
   { path: 'altapersona/:type', component: PersonalManagementComponent },
   { path: 'altavehiculo', component: VehicleManagementComponent },
-  {
-    path: 'producto',
+  { 
+    path: 'producto', 
     component: ProductSelectionComponent,
-    canActivate: [AuthGuard]
+    canActivate:[AuthGuard] 
   },
   { path: 'dni/:type', component: DniSearchComponent },
   { path: 'adicional', component: AdditionalDataPersonComponent },
   { path: 'finproceso', component: SuccessProcessComponent },
-  { path: 'coberturas', component: SelectionCoverageComponent },
-  { path: 'resumen/:type', component: SummaryComponent },
-  { path: 'cuenta', component: AccountAdditionalComponent },
-  { path: 'fincontratacion', component: PolicyCalculationComponent },
-  { path: 'tarjeta/:id', component: CreditCardComponent },
+  { path: 'coberturas', component: SelectionCoverageComponent }, 
+  { path: 'resumen/:type', component: SummaryComponent },  
+  { path: 'cuenta', component: AccountAdditionalComponent }, 
+  { path: 'fincontratacion', component: PolicyCalculationComponent }, 
+  { path: 'tarjeta/:id', component: CreditCardComponent }, 
   { path: 'asignacion/:type', component: IntervenerAllocationComponent },
   { path: 'regular/:type', component: RegularCustomerComponent },
   { path: 'login', component: LoginComponent },
