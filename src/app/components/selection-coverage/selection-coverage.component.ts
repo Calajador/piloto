@@ -29,7 +29,7 @@ export class SelectionCoverageComponent implements OnInit {
 
   ngOnInit(): void {
     this.policy={
-      product:1,//CAMBIAR A ID PRODUCTO
+      product:+localStorage.getItem("idProduct"),//CAMBIAR A ID PRODUCTO
       effectiveDate:"",
       frequency:0,
       modality:0,

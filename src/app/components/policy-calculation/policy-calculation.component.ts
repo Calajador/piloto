@@ -4,6 +4,7 @@ import { CalculateInsured } from 'src/app/model/CalculateInsured';
 import { PolicyService } from 'src/app/services/policy.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Policy } from 'src/app/model/Policy';
+import { Vehicle } from 'src/app/model/Vehicle';
 
 @Component({
   selector: 'app-policy-calculation',
@@ -27,20 +28,23 @@ export class PolicyCalculationComponent implements OnInit {
 
   getCalculate(){
     
-    let vehicle=this.getInfoVehicle();
+    let vehicle:Vehicle=this.getInfoVehicle();
     if(vehicle){
        this.policy=JSON.parse(localStorage.getItem("policy"));
       this.calculatePolicy={
         brand:vehicle.brand,
         cost:vehicle.price,
         model:vehicle.model,
+        idVersion:vehicle.version,
+        idPolicyHolder:+localStorage.getItem("policyholder"),    
+        idInsured:+localStorage.getItem("insured"),
         version:vehicle.versionText,
         numberPlate:vehicle.plate,
         vehicleKilometers:vehicle.currentKms,
         expectedKilometers:vehicle.expectedKms,
         yearVehicle:vehicle.year,
         idModality:this.policy.modality,
-        idProduct:2,//cambiar id producto
+        idProduct:+localStorage.getItem("idProduct"),//cambiar id producto
         paymentFrequency:this.policy.frequency
 
 
@@ -77,6 +81,7 @@ export class PolicyCalculationComponent implements OnInit {
    }
 
   onClickContinue(){
+    localStorage.setItem("policy",JSON.stringify(this.policy));
     this.router.navigate(['cuenta']);
   }
 

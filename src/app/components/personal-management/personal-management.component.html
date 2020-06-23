@@ -6,7 +6,7 @@
       <div class="card">
         <div class="card-header">
             <h3>Alta persona</h3>
-            <span>Tomador</span>
+            <span>{{typePerson}}</span>
         </div>
         <div class="card-body">
             <form  [formGroup]="personForm">
@@ -120,8 +120,8 @@
         <div class="card-footer">
             <div class="row justify-content-between mt-2 pr-3 pl-3">      
                          
-                    <button class="btn btn-outline-primary" (click)="onClickBack()">Atras</button>
-                    <button class="btn btn-primary" (click)="onClickContinue()">Continuar</button>
+                    <button id="btn_person_back" class="btn btn-outline-primary" (click)="onClickBack()">Atras</button>
+                    <button id="btn_person_continue" class="btn btn-primary" (click)="onClickContinue()">Continuar</button>
                                     
         </div>
         </div>

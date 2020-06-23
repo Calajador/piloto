@@ -23,6 +23,7 @@ export class PersonalManagementComponent implements OnInit {
   person:Person;
   countries:Country[];
   type:string;
+  typePerson:string;
   address:Address;
   identification:Identification;
 
@@ -37,7 +38,9 @@ export class PersonalManagementComponent implements OnInit {
   ngOnInit(): void {
     this.submitted=false;
     
+
     this.type=this._route.snapshot.paramMap.get('type');
+    this.typePerson=this.setTypePerson(this.type);
     this.personForm = this.formBuilder.group({
       name_singup: ['', [Validators.required]],
       surname_singup: ['', [Validators.required]],
@@ -83,6 +86,15 @@ export class PersonalManagementComponent implements OnInit {
 
     this.getCountry();
     
+  }
+
+  setTypePerson(type:string):string{
+
+    if(type=='insured'){
+      return 'Asegurado';
+    }else{
+      return 'Tomador';
+    }
   }
 
 

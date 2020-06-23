@@ -4,6 +4,9 @@ import {Location} from '@angular/common'
 import { FormBuilder, Validators } from '@angular/forms';
 import { CreditCard } from 'src/app/model/CreditCard';
 import { PolicyService } from 'src/app/services/policy.service';
+import { BankInvoicing } from 'src/app/model/BankInvoicing';
+import { NgxSpinner } from 'ngx-spinner/lib/ngx-spinner.enum';
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-credit-card',
   templateUrl: './credit-card.component.html',
@@ -28,6 +31,7 @@ export class CreditCardComponent implements OnInit {
   constructor(private router:Router,
     private _route:ActivatedRoute,
     private policyService:PolicyService,
+    private spinner: NgxSpinnerService,
     private formBuilder:FormBuilder,
     private location:Location) { }
 
@@ -57,7 +61,7 @@ export class CreditCardComponent implements OnInit {
 
   onClickPay(){
     let credit:CreditCard;
-
+    let bankInvoicing:BankInvoicing;
 
     if(this.formCredit.valid){
       credit={
@@ -68,12 +72,27 @@ export class CreditCardComponent implements OnInit {
         number:this.card,
         year:this.year
       }
+      this.spinner.show();
       this.policyService.payCreditCard(credit).subscribe(
         res=>{
+          this.spinner.hide()
           this.router.navigate(['finproceso'])
         },
         err=>{
-          console.log(err);
+          bankInvoicing={
+            idBankInvoicing:this.id
+          }
+          
+          this.policyService.bankInvoicing(bankInvoicing).subscribe(
+            res=>{
+              this.spinner.hide();
+              this.router.navigate(['finproceso'])
+             
+            },
+            err=>{
+              this.spinner.hide();
+            }
+          )
         }
       )
      

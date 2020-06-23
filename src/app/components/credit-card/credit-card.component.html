@@ -1,3 +1,4 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>
 <div class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-md-6">
@@ -71,8 +72,8 @@
                                 </div>
                            </div>
                            <div class="form-row justify-content-between mt-3">
-                                <button class="btn btn-outline-primary col-md-3" (click)="onClickBack()" >Atras</button>
-                                <button class="btn btn-primary col-md-3" (click)="onClickPay()">Pagar</button>
+                                <button id="btn_credit_back" class="btn btn-outline-primary col-md-3" (click)="onClickBack()" >Atras</button>
+                                <button id="btn_credit_continue"  class="btn btn-primary col-md-3" (click)="onClickPay()">Pagar</button>
                             </div>
                         </div>
                     </form>

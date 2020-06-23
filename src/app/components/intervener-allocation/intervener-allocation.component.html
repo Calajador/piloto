@@ -32,6 +32,7 @@
                       <input type="text"
                       formControlName="inter_firtsname"
                       readonly
+                      id="inter_lastname"
                        class="form-control-plaintext" >
                     </div>
                 </div>
@@ -42,6 +43,7 @@
                       <input type="text" 
                       readonly                     
                       formControlName="inter_lastname"
+                      id="inter_lastname"
                       readonly class="form-control-plaintext">
                     </div>
                 </div>
@@ -50,6 +52,7 @@
                     <div class="col-sm-8">
                       <input type="text" 
                       formControlName="inter_dni"
+                      id="inter_lastname"
                       readonly class="form-control-plaintext">
                     </div>
                 </div>
@@ -57,48 +60,67 @@
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-4 col-form-label">Fecha de nacimiento</label>
                     <div class="col-sm-8">
-                      <input type="text" readonly class="form-control-plaintext"  formControlName="inter_bitrtay">
+                      <input type="text" readonly class="form-control-plaintext"  
+                      formControlName="inter_bitrtay"
+                      id="inter_bitrtay">
                     </div>
                 </div>
             
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Dirección</label>
                     <div class="col-sm-3">
-                      <input type="text" readonly class="form-control-plaintext" formControlName="inter_address">
+                      <input type="text" readonly class="form-control-plaintext" 
+                      formControlName="inter_address"
+                      id="inter_address">
                     </div>
                     <label class="col-sm-2 col-form-label">Número</label>
                     <div class="col-sm-1">
-                      <input type="text" readonly class="form-control-plaintext"  formControlName="inter_number">
+                      <input type="text" readonly class="form-control-plaintext"
+                      formControlName="inter_number"
+                      id="inter_number">
                     </div>
                     <label class="col-sm-1 col-form-label">Piso</label>
                     <div class="col-sm-1">
-                      <input type="text" readonly class="form-control-plaintext"  formControlName="inter_floor">
+                      <input type="text" readonly class="form-control-plaintext" 
+                      formControlName="inter_floor"
+                      id="inter_floor">
                     </div>
                 </div>
             
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-2 col-form-label">Provincia</label>
                     <div class="col-sm-3">
-                      <input type="text" readonly class="form-control-plaintext"  formControlName="inter_city">
+                      <input type="text" readonly 
+                      id="inter_city"
+                      class="form-control-plaintext"  formControlName="inter_city">
                     </div>
                     <label class="col-sm-3 col-form-label">Codigo postal</label>
                     <div class="col-sm-1">
-                      <input type="text" readonly class="form-control-plaintext"  formControlName="inter_codepostal">
+                      <input type="text" 
+                      id="inter_codepostal"
+                      readonly class="form-control-plaintext"  formControlName="inter_codepostal">
                     </div>
                 </div>
             
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-2 col-form-label">Pais</label>
-                    <div class="col-sm-8">
-                      <input type="text" readonly class="form-control-plaintext"  formControlName="inter_country">
+                    <div class="col-sm-4 mt-2">
+                      <select class="form-control" [(ngModel)]="idCountry" disabled   formControlName="inter_country"> 
+                        
+                        <option *ngFor="let item of countries" [value]="item.id">{{item.nombre}}</option>
+                      </select>
+                      <!--
+                      <input type="text" readonly 
+                      id="inter_country"
+                      class="form-control-plaintext"  formControlName="inter_country">-->
                     </div>
                 </div>                                                                                        
             </form> 
             </div>          
             <div class="card-footer" *ngIf="type=='insured' || type=='policy'">
               <div class="row justify-content-between p-3">      
-                <button class="btn btn-outline-primary" (click)="onClickBack()">ATRAS</button>
-                <button class="btn btn-primary" (click)="onClickContinue()">CONTINUAR</button>                              
+                <button id="btn_intervener_back" class="btn btn-outline-primary" (click)="onClickBack()">ATRAS</button>
+                <button id="btn_intervener_continue" class="btn btn-primary" (click)="onClickContinue()">CONTINUAR</button>                              
             </div>
             </div>
         </div>

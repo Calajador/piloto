@@ -31,8 +31,9 @@ export class AuthService {
 }
 
   isLogged():boolean{
+
     var session=localStorage.getItem('username');
-    if(session!=""){
+    if(session){
       return true;
     }else{
       return false;

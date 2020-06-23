@@ -158,6 +158,7 @@ export class VehicleManagementComponent implements OnInit {
       this.vehicle.brand=this.brandText;
       this.vehicle.model=this.modelText;
       this.vehicle.versionText=this.versionText;
+      this.vehicle.version=+this.versionModel;
       localStorage.setItem("vehicle",JSON.stringify(this.vehicle));
       this.router.navigate(['coberturas']);
     }

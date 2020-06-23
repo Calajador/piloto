@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { PolicyProcess } from 'src/app/model/PolicyProcess';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PolicyService } from 'src/app/services/policy.service';
+import { BankInvoicing } from 'src/app/model/BankInvoicing';
+import { NgxSpinnerService } from 'ngx-spinner';
+
+
 
 @Component({
   selector: 'app-summary',
@@ -15,6 +19,7 @@ export class SummaryComponent implements OnInit {
 
   constructor(private _route:ActivatedRoute,
     private policyService:PolicyService,
+    private spinner: NgxSpinnerService,
     private router:Router) { }
 
   ngOnInit(): void {
@@ -22,7 +27,7 @@ export class SummaryComponent implements OnInit {
   }
 
   onClickConfirm(){
-  
+    let bankInvoicing:BankInvoicing;
     this.policy={
       agent:localStorage.getItem("username"),
       insured:+localStorage.getItem("insured"),
@@ -39,7 +44,20 @@ export class SummaryComponent implements OnInit {
         if(this.type=='credit'){
           this.router.navigate(['tarjeta',res.id])
         }else{
-          this.router.navigate(['finproceso'])
+          bankInvoicing={
+            idBankInvoicing:res.id
+          }
+          this.spinner.show();
+          this.policyService.bankInvoicing(bankInvoicing).subscribe(
+            res=>{
+              this.router.navigate(['finproceso'])
+              this.spinner.hide();
+            },
+            err=>{
+              this.spinner.hide();
+            }
+          )
+         
         }
       },
       err=>{

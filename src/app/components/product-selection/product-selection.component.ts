@@ -11,6 +11,7 @@ import {Location} from '@angular/common';
 export class ProductSelectionComponent implements OnInit {
 
   products:Product[];
+  idProduct:number;
 
   constructor(private router:Router,
               private _location:Location,
@@ -21,6 +22,7 @@ export class ProductSelectionComponent implements OnInit {
   }
 
   onClickContinue(){
+    localStorage.setItem("idProduct",this.idProduct.toString());
     this.router.navigate(['/regular','policy']);
   }
 
@@ -28,6 +30,8 @@ export class ProductSelectionComponent implements OnInit {
     this.productService.getProducts().subscribe(
       res=>{
         this.products=res
+        this.idProduct=this.products[0].id;
+        
       },
       err=>{
         
@@ -35,6 +39,10 @@ export class ProductSelectionComponent implements OnInit {
       }
     )
     ;
+  }
+
+  onChangeProduct(event){
+    this.idProduct=+event.target.value
   }
 
   onClickBack(){

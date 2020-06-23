@@ -8,6 +8,7 @@ import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { MasterService } from 'src/app/services/master.service';
 import { License } from 'src/app/model/License';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-additional-data-person',
@@ -28,6 +29,7 @@ export class AdditionalDataPersonComponent implements OnInit {
   constructor(private personService:PersonService,
     private datePipe: DatePipe,
     private router:Router,
+    private spinner:NgxSpinnerService,
     private masterService:MasterService,
     private _location: Location,
     private formBuilder:FormBuilder) { }
@@ -98,11 +100,14 @@ export class AdditionalDataPersonComponent implements OnInit {
       
       this.person.drivingLicenses.push(this.drivingLicenses);
       this.person.gender=this.gender;
+      this.spinner.show()
       this.personService.createPerson(this.person).subscribe(
         res=>{
+          this.spinner.hide();
           this.router.navigate(['altavehiculo']);
         },
         err=>{
+          this.spinner.hide();
           console.log(err);
         }
       )
