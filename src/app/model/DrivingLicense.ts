@@ -1,5 +1,5 @@
 export interface DrivingLicense{
     date:string;
-    type:number;
+    type:number;    
     numberLicense:string;
 }

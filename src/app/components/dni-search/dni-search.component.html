@@ -14,9 +14,10 @@
                 
                     <input type="text" class="form-control" placeholder="DNI" 
                     formControlName="frm_dni"
+                    id="dni_search"
                     [(ngModel)]="identification.identification" >
                     <div class="input-group-append">
-                    <span class="input-group-text">SEARCH</span>    
+                    <button id="btn_search_alternative"  class="btn btn-secondary" (click)="onClickContinue()">SEARCH</button>  
                     </div>
                
               </div>  
@@ -32,16 +33,12 @@
         <div class="col-6 p-5">
             <div class="d-flex justify-content-between bd-highlight">
                 
-                <button class="btn btn-outline-primary" (click)="onClickBack()">Atras</button>
-                <button class="btn btn-primary" (click)="onClickContinue()">Continuar</button>
+                <button id="btn_search_back" class="btn btn-outline-primary" (click)="onClickBack()">Atras</button>
+                <button id="btn_search_continue"  class="btn btn-primary" (click)="onClickContinue()">Continuar</button>
             </div>
         </div>                
     </div>
-    <div class="row flex-row-reverse">
-        
-            <button class="btn btn-danger float-rigth" >Abandonar</button>
-       
-    </div>
+
 
 </div>
 </form>

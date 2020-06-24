@@ -55,6 +55,7 @@ export class LoginComponent implements OnInit {
           
             console.log("login","entro")
             localStorage.setItem("username",this.user.userName)
+     
             this.router.navigate(['/producto'])
             this.spinner.hide();
           },

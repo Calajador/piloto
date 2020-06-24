@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DniSearchComponent } from './dni-search.component';
+import { SummaryInsuredComponent } from './summary-insured.component';
 
-describe('DniSearchComponent', () => {
-  let component: DniSearchComponent;
-  let fixture: ComponentFixture<DniSearchComponent>;
+describe('SummaryInsuredComponent', () => {
+  let component: SummaryInsuredComponent;
+  let fixture: ComponentFixture<SummaryInsuredComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DniSearchComponent ]
+      declarations: [ SummaryInsuredComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DniSearchComponent);
+    fixture = TestBed.createComponent(SummaryInsuredComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -2,7 +2,33 @@
     <app-nav></app-nav>
 
     <router-outlet></router-outlet>
-
+    <div class="row justify-content-end mr-5 mt-2">
+        <button *ngIf="userName" type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+          Abandonar
+        </button>
+    </div>
+    
+      
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Abandonar proceso</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                ¿Desea abandonar el proceso?, si aceptas perderas la información ya diligenciada
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secundary" data-dismiss="modal">Cerrar</button>
+              <button type="button"  class="btn btn-danger" (click)="leaveApp()" >Aceptar</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
 
 

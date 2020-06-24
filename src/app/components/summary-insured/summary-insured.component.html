@@ -1,23 +1,22 @@
 <div class="container mt-4 bg-ligth">
     <div class="row justify-content-center">
-        <div class="shadow p-3 mb-5 bg-white rounded">
-            <form class="col-md-9">
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-4 col-form-label">Tomador es asegurado</label>
-                    <div class="col-sm-8">
-                        <label class="switch ">
-                            <input type="checkbox" class="success">
-                            <span class="slider round">
-                            </span>
-                        </label>
-                    </div>
-                </div>
-               
+        <div class="card mb-5 bg-white rounded">
+            <div class="card-header">
+              <div class="row align-items-center p-3">
+                <i class="fas fa-user text-primary mr-3"></i>
+                <h4>Datos persona</h4>
+              </div>
+              <span>Asegurado</span>
+
+            </div>
+            <div class="card-body ">
+              <form class="p-3"  [formGroup]="intervenerForm">                           
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-4 col-form-label">Nombre</label>
                     <div class="col-sm-8">
                       <input type="text"
-                      (ngModel)="person.firstName"
+                      formControlName="summary_firtsname"
+                      readonly
                        class="form-control-plaintext" >
                     </div>
                 </div>
@@ -26,7 +25,8 @@
                     <label for="staticEmail" class="col-sm-4 col-form-label">Apellidos</label>
                     <div class="col-sm-8">
                       <input type="text" 
-                      (ngModel)="person.lastName"
+                      readonly                     
+                      formControlName="summary_lastname"
                       readonly class="form-control-plaintext">
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                     <label for="staticEmail" class="col-sm-4 col-form-label">DNI</label>
                     <div class="col-sm-8">
                       <input type="text" 
-              
+                      formControlName="summary_dni"
                       readonly class="form-control-plaintext">
                     </div>
                 </div>
@@ -42,44 +42,49 @@
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-4 col-form-label">Fecha de nacimiento</label>
                     <div class="col-sm-8">
-                      <input type="text" readonly class="form-control-plaintext" value="">
+                      <input type="text" readonly class="form-control-plaintext"  formControlName="summary_bitrtay">
                     </div>
                 </div>
             
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Dirección</label>
                     <div class="col-sm-3">
-                      <input type="text" readonly class="form-control-plaintext" value="">
+                      <input type="text" readonly class="form-control-plaintext" formControlName="summary_address">
                     </div>
                     <label class="col-sm-2 col-form-label">Número</label>
                     <div class="col-sm-1">
-                      <input type="text" readonly class="form-control-plaintext" value="">
+                      <input type="text" readonly class="form-control-plaintext"  formControlName="summary_number">
                     </div>
                     <label class="col-sm-1 col-form-label">Piso</label>
                     <div class="col-sm-1">
-                      <input type="text" readonly class="form-control-plaintext" value="dd">
+                      <input type="text" readonly class="form-control-plaintext"  formControlName="summary_floor">
                     </div>
                 </div>
             
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-2 col-form-label">Provincia</label>
                     <div class="col-sm-3">
-                      <input type="text" readonly class="form-control-plaintext" value="dd">
+                      <input type="text" readonly class="form-control-plaintext"  formControlName="summary_city">
                     </div>
                     <label class="col-sm-3 col-form-label">Codigo postal</label>
                     <div class="col-sm-1">
-                      <input type="text" readonly class="form-control-plaintext" value="123456">
+                      <input type="text" readonly class="form-control-plaintext"  formControlName="summary_codepostal">
                     </div>
                 </div>
             
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-2 col-form-label">Pais</label>
                     <div class="col-sm-8">
-                      <input type="text" readonly class="form-control-plaintext" value="España">
+                      <input type="text" readonly class="form-control-plaintext"  formControlName="summary_country">
                     </div>
                 </div>                                                                                        
             </form> 
+            </div>          
+      
+        
         </div>
         
     </div>
+   
+  
 </div> 

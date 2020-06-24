@@ -4,6 +4,7 @@ import { Constants } from '../common/Constants';
 import { Brand } from '../model/Brand';
 import { VehicleModel } from '../model/VehicleModel';
 import { Coverage } from '../model/Coverage';
+import { VersionVehicle } from '../model/VersionVehicle';
 const httpOptions = {headers: new HttpHeaders({'Content-Type': 'application/json' })};
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,12 @@ export class VehicleService {
     let id=1;
     let url=Constants.UrlApis.GET_COVERING+id;
     return this.http.get<Coverage[]>(url,httpOptions);
+  }
+
+  getVersion(idModel:number,idBrand:number){
+    let url=Constants.UrlApis.GET_VEHICLE_VERSION.replace(":idBrand",idBrand.toString()); 
+    url=url.replace(":idModel",idModel.toString());
+    return this.http.get<VersionVehicle[]>(url,httpOptions);
   }
 
   

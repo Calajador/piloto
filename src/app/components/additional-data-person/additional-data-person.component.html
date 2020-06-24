@@ -1,3 +1,6 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "line-spin-fade" [fullScreen] = "true">
+    <p style="color: white" > Cargando... </p>
+</ngx-spinner>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8 mt-4">
@@ -17,9 +20,11 @@
                                     <div class="col-md-9">
                                         <select class="form-control" formControlName="gender_intervening" 
                                         [(ngModel)]="gender"
+                                        id="gender_intervening"
                                         (change)="onChangeGender()">
                                             <option value="M">Masculino</option>
                                             <option value="F">Femenino</option>
+                                            <option value="ND">No definido</option>
                                         </select>
                                     </div>
                                 </div>
@@ -29,10 +34,11 @@
                                     </div>
                                     <div class="col-md-9">
                                         <select class="form-control" formControlName="licenses_intervening" 
-                                       
+                                        id="license_type"
+                                        [(ngModel)]="type_license"
                                         (change)="onChangeLicenses()">
-                                            <option value="8">B1</option>
-                                            <option value="9">B2</option>
+                                            <option value="0" selected>Seleccione un carnet</option>
+                                            <option *ngFor="let item of licenses" [value]="item.id">{{item.tipo}}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -54,6 +60,7 @@
                                     <div class="col-md-9">
                                         <input type="date" class="form-control"
                                         [(ngModel)]="obtaning"
+                                        id="obtaining_year"
                                         formControlName="obtaning_intervening">
                                     </div>
                                 </div>

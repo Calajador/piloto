@@ -8,6 +8,8 @@ import { PersonService } from 'src/app/services/person.service';
 import { DatePipe } from '@angular/common';
 import { Spinner } from 'ngx-spinner/lib/ngx-spinner.enum';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Country } from 'src/app/model/Country';
+import { MasterService } from 'src/app/services/master.service';
 
 @Component({
   selector: 'app-personal-management',
@@ -19,13 +21,16 @@ export class PersonalManagementComponent implements OnInit {
   personForm:any;
   submitted:boolean;
   person:Person;
+  countries:Country[];
   type:string;
+  typePerson:string;
   address:Address;
   identification:Identification;
 
   constructor(private router:Router,
     private formBuilder:FormBuilder,
     private datePipe: DatePipe,
+    private masterService:MasterService,
     private spinner:NgxSpinnerService,
     private _route:ActivatedRoute,
     private personService:PersonService) { }
@@ -33,7 +38,9 @@ export class PersonalManagementComponent implements OnInit {
   ngOnInit(): void {
     this.submitted=false;
     
+
     this.type=this._route.snapshot.paramMap.get('type');
+    this.typePerson=this.setTypePerson(this.type);
     this.personForm = this.formBuilder.group({
       name_singup: ['', [Validators.required]],
       surname_singup: ['', [Validators.required]],
@@ -46,6 +53,8 @@ export class PersonalManagementComponent implements OnInit {
       postalcode_singup: ['', [Validators.required,Validators.maxLength(4)]],
       country_singup: ['', [Validators.required]],
     });
+
+    
 
     
     this.address={
@@ -75,11 +84,34 @@ export class PersonalManagementComponent implements OnInit {
       addresses:[]
     }
 
-    
+    this.getCountry();
+    this.setValueLocal();
+  }
+
+  setTypePerson(type:string):string{
+
+    if(type=='insured'){
+      return 'Asegurado';
+    }else{
+      return 'Tomador';
+    }
   }
 
 
   onChangeCountry(event){   
+    
+  }
+
+  getCountry(){
+    this.masterService.getCountries().subscribe(
+      res=>{
+        this.countries=res;
+        this.address.idCountry=32;
+      },
+      err=>{
+        console.log(err);
+      }
+    )
     
   }
 
@@ -104,12 +136,15 @@ export class PersonalManagementComponent implements OnInit {
                        
           if(this.type=='policy'){
             localStorage.setItem("policyholder",res[0].id) 
+            localStorage.setItem("personholder",JSON.stringify(res[0]));
             this.router.navigate(['/asignacion','policy']) 
+            
           }else{
+            localStorage.setItem("personinsured",JSON.stringify(res[0]));
             localStorage.setItem("insured",res.id)
           }
           
-          localStorage.setItem("persontmp",JSON.stringify(res[0]));
+        
           this.spinner.hide();
         },
         err=>{
@@ -123,6 +158,37 @@ export class PersonalManagementComponent implements OnInit {
   format(date){
     const dateSendingToServer = this.datePipe.transform(date, 'dd-MM-yyyy')
     return dateSendingToServer
+  }
+
+  parseDateToISO(dateString:string):string{
+    
+    let year=dateString.substr(6,4);  
+    let month=dateString.substr(3,2);
+    let day=dateString.substr(0,2);
+    return year+"-"+month+"-"+day;
+  }
+
+  setValueLocal(){
+    
+
+    let person:Person;
+    if(this.type!='insured'){
+      person=JSON.parse(localStorage.getItem("personholder"))
+
+    }else{
+     
+      person=JSON.parse(localStorage.getItem("personinsured"));
+    }
+
+    if(person){
+      this.person=person;
+      this.identification=person.identifications[0];
+      this.address=person.addresses[0];
+  
+      this.person.dateBorn=this.parseDateToISO(person.dateBorn)
+    }
+ 
+    
   }
 
 

@@ -1,4 +1,5 @@
 export interface Country{
-    code:number;
-    name:string;
+    id:number;
+    codigo:number;
+    nombre:string;
 }

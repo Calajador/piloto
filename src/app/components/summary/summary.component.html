@@ -1,38 +1,44 @@
-<div class="container mt-4">
-   <div class="card">
-       <div class="card-header">
-           <h2>Resumen</h2>
-       </div>
-       <div class="card-body">
-        
-            <ul ngbNav #nav="ngbNav"  class="nav-tabs justify-content-center nav-fill">
-                <li [ngbNavItem]="1">
-                    <a ngbNavLink>Tomador</a>
-                    <ng-template ngbNavContent>
-                        <p>works</p>
-                    </ng-template>
-                </li>
-                <li [ngbNavItem]="2">
-                    <a ngbNavLink href="./producto">Asegurado</a>
-                    <ng-template ngbNavContent>
-                        <app-midinero></app-midinero>    
-                    </ng-template>
-                </li>
-                <li [ngbNavItem]="3">
-                    <a ngbNavLink>Vehiculo</a>
-                    <ng-template ngbNavContent>
-                        <app-midinero></app-midinero>    
-                    </ng-template>
-                </li>
-                <li [ngbNavItem]="4">
-                    <a ngbNavLink>Oferta</a>
-                    <ng-template ngbNavContent>
-                        <app-midinero></app-midinero>    
-                    </ng-template>
-                </li>
-            </ul>
-        
+
+
+<div class="container">
+    <div class="row justify-content-between mb-4 mt-3">
+      <h1>Resumen</h1>
+     
+    </div>     
+    
+      
+    <ngb-tabset [destroyOnHide]="false">
+      
+      <ngb-tab title="Tomador">
+        <ng-template ngbTabContent>
+            <app-intervener-allocation [summaryType]='policy' ></app-intervener-allocation>
+        </ng-template>
+      </ngb-tab>
        
-       </div>
-   </div>
+      <ngb-tab>
+        <ng-template ngbTabTitle>Asegurado</ng-template>
+        <ng-template ngbTabContent> 
+          <app-summary-insured  ></app-summary-insured>
+        </ng-template>
+      </ngb-tab>
+       
+      <ngb-tab>
+        <ng-template ngbTabTitle>Vehiculo</ng-template>
+        <ng-template ngbTabContent>
+            <app-summary-vehicle></app-summary-vehicle>
+        </ng-template>
+      </ngb-tab>
+       
+      <ngb-tab>
+        <ng-template ngbTabTitle>Oferta</ng-template>
+        <ng-template ngbTabContent>
+           <app-policy-calculation summary="yes" [type]="type"></app-policy-calculation>
+        </ng-template>
+      </ngb-tab>
+       
+    </ngb-tabset>
+    <div class="row justify-content-between">
+      <button class="btn btn-outline-primary" (click)="onClickBack()">Atras</button>
+  
+    </div>
 </div>

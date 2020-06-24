@@ -4,4 +4,7 @@ export interface Policy{
     frequency:number;
     modality:number;
     product:number;
+
+    
+
 }
