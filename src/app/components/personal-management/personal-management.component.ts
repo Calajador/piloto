@@ -85,7 +85,7 @@ export class PersonalManagementComponent implements OnInit {
     }
 
     this.getCountry();
-    
+    this.setValueLocal();
   }
 
   setTypePerson(type:string):string{
@@ -158,6 +158,37 @@ export class PersonalManagementComponent implements OnInit {
   format(date){
     const dateSendingToServer = this.datePipe.transform(date, 'dd-MM-yyyy')
     return dateSendingToServer
+  }
+
+  parseDateToISO(dateString:string):string{
+    
+    let year=dateString.substr(6,4);  
+    let month=dateString.substr(3,2);
+    let day=dateString.substr(0,2);
+    return year+"-"+month+"-"+day;
+  }
+
+  setValueLocal(){
+    
+
+    let person:Person;
+    if(this.type!='insured'){
+      person=JSON.parse(localStorage.getItem("personholder"))
+
+    }else{
+     
+      person=JSON.parse(localStorage.getItem("personinsured"));
+    }
+
+    if(person){
+      this.person=person;
+      this.identification=person.identifications[0];
+      this.address=person.addresses[0];
+  
+      this.person.dateBorn=this.parseDateToISO(person.dateBorn)
+    }
+ 
+    
   }
 
 

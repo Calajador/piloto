@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { CalculateInsured } from 'src/app/model/CalculateInsured';
 import { PolicyService } from 'src/app/services/policy.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Policy } from 'src/app/model/Policy';
 import { Vehicle } from 'src/app/model/Vehicle';
+import { BankInvoicing } from 'src/app/model/BankInvoicing';
+import { PolicyProcess } from 'src/app/model/PolicyProcess';
 
 @Component({
   selector: 'app-policy-calculation',
@@ -17,12 +19,20 @@ export class PolicyCalculationComponent implements OnInit {
   price:number;
   policy:Policy;
   dateEffect:string;
+  policyProcess:PolicyProcess;
+
+  @Input('summary')
+  summary: string;
+
+  @Input('type')
+  type: string;
 
   constructor(private router:Router,
     private spinner:NgxSpinnerService,
     private policyService:PolicyService) { }
 
   ngOnInit(): void {
+    console.log(this.type);
     this.getCalculate();
   }
 
@@ -78,7 +88,50 @@ export class PolicyCalculationComponent implements OnInit {
      
        return null;
      }
-   }
+  }
+
+  onClickConfirm(){
+    
+    let bankInvoicing:BankInvoicing;
+    this.policyProcess={
+      agent:1,
+      insured:+localStorage.getItem("insured"),
+      payment:JSON.parse(localStorage.getItem("payment")),
+      policy:JSON.parse(localStorage.getItem("policy")),
+      policyHolder:+localStorage.getItem("policyholder"),
+      vehicle:JSON.parse(localStorage.getItem("vehicle"))
+    }
+
+    this.spinner.show();
+    this.policyService.generatePolicy(this.policyProcess).subscribe(
+      res=>{
+        console.log(res);
+        if(this.type=='credit'){
+          this.spinner.hide();
+          this.router.navigate(['tarjeta',res.id])
+        }else{
+          bankInvoicing={
+            idBankInvoicing:res.id
+          }
+         
+          this.policyService.bankInvoicing(bankInvoicing).subscribe(
+            res=>{
+              this.router.navigate(['finproceso'])
+              this.spinner.hide();
+            },
+            err=>{
+              this.spinner.hide();
+            }
+          )
+         
+        }
+      },
+      err=>{
+        console.log(err);
+      }
+    )   
+  }
+
 
   onClickContinue(){
     localStorage.setItem("policy",JSON.stringify(this.policy));

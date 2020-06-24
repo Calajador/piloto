@@ -5,7 +5,7 @@ import { Payment } from './Payment';
 export interface PolicyProcess{
     policyHolder:number;
     insured:number;
-    agent:string;
+    agent:number;
     vehicle:VehicleModel;
     policy:Policy;
     payment:Payment;

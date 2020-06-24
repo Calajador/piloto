@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PolicyService } from 'src/app/services/policy.service';
 import { BankInvoicing } from 'src/app/model/BankInvoicing';
 import { NgxSpinnerService } from 'ngx-spinner';
-
+import { Location } from '@angular/common'
 
 
 @Component({
@@ -20,55 +20,18 @@ export class SummaryComponent implements OnInit {
   constructor(private _route:ActivatedRoute,
     private policyService:PolicyService,
     private spinner: NgxSpinnerService,
+    private _location:Location,
     private router:Router) { }
 
   ngOnInit(): void {
     this.type=this._route.snapshot.paramMap.get('type');
   }
 
-  onClickConfirm(){
-    let bankInvoicing:BankInvoicing;
-    this.policy={
-      agent:localStorage.getItem("username"),
-      insured:+localStorage.getItem("insured"),
-      payment:JSON.parse(localStorage.getItem("payment")),
-      policy:JSON.parse(localStorage.getItem("policy")),
-      policyHolder:+localStorage.getItem("policyholder"),
-      vehicle:JSON.parse(localStorage.getItem("vehicle"))
-    }
-
-
-    this.policyService.generatePolicy(this.policy).subscribe(
-      res=>{
-        console.log(res);
-        if(this.type=='credit'){
-          this.router.navigate(['tarjeta',res.id])
-        }else{
-          bankInvoicing={
-            idBankInvoicing:res.id
-          }
-          this.spinner.show();
-          this.policyService.bankInvoicing(bankInvoicing).subscribe(
-            res=>{
-              this.router.navigate(['finproceso'])
-              this.spinner.hide();
-            },
-            err=>{
-              this.spinner.hide();
-            }
-          )
-         
-        }
-      },
-      err=>{
-        console.log(err);
-      }
-    )
-
-   
-  
+  onClickBack(){
+    this._location.back();
   }
 
+ 
 
 
 }

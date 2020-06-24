@@ -1,11 +1,9 @@
-<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true">
-  <p style="color: white" > Loading... </p>
-</ngx-spinner>
+
 
 <div class="container">
     <div class="row justify-content-between mb-4 mt-3">
       <h1>Resumen</h1>
-      <button class="btn btn-primary col-md-2" (click)="onClickConfirm()">Confimar</button>
+     
     </div>     
     
       
@@ -34,13 +32,13 @@
       <ngb-tab>
         <ng-template ngbTabTitle>Oferta</ng-template>
         <ng-template ngbTabContent>
-           <app-policy-calculation></app-policy-calculation>
+           <app-policy-calculation summary="yes" [type]="type"></app-policy-calculation>
         </ng-template>
       </ngb-tab>
        
     </ngb-tabset>
     <div class="row justify-content-between">
-      <button>Atras</button>
+      <button class="btn btn-outline-primary" (click)="onClickBack()">Atras</button>
   
     </div>
 </div>

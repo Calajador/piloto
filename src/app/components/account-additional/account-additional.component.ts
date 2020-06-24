@@ -34,6 +34,7 @@ export class AccountAdditionalComponent implements OnInit {
     )
    
     this.switchAccount=false;
+    this.setValueLocal();
   }
 
   onChangeAccount(event){
@@ -61,6 +62,14 @@ export class AccountAdditionalComponent implements OnInit {
         //this.router.navigate(['finproceso'])
       }
     }       
+  }
+
+  setValueLocal(){
+    let payment:Payment=JSON.parse(localStorage.getItem("payment"))
+    if(payment){
+      this.payment=payment;
+      this.account=+payment.account;
+    }
   }
 
   onClickBack(){

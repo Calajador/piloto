@@ -49,13 +49,13 @@ export class VehicleManagementComponent implements OnInit {
 
     this.vehicleForm=this.formBuilder.group({
       car_registration_vr:['',[Validators.required,Validators.pattern(plateRegex)]],
-      cost_vr:['',Validators.required],
-      current_km_vr:['',Validators.required],
-      provied_km_vr:['',Validators.required],
+      cost_vr:['',[Validators.required,Validators.min(1)]],
+      current_km_vr:['',[Validators.required,Validators.min(1)]],
+      provied_km_vr:['',[Validators.required,Validators.min(1)]],
       year_vr:['',Validators.required],
       mark_vr:['',Validators.required],
       model_vr:['',Validators.required],
-      version_vr:['',Validators.required]
+      version_vr:['',[Validators.required]]
     })
 
   
@@ -63,7 +63,10 @@ export class VehicleManagementComponent implements OnInit {
     this.brandSelected=0;
     this.versionModel=0;
     this.modelSelected=0;
+
     this.getBrands();
+    
+    this.setValueLocal();
   }
 
   get f() { return this.vehicleForm.controls;}
@@ -149,14 +152,31 @@ export class VehicleManagementComponent implements OnInit {
     )
   }
 
+
+  setValueLocal(){
+    
+    let vehicle:Vehicle=JSON.parse(localStorage.getItem("vehicle"));
+    if(vehicle){
+      this.vehicle=vehicle;
+      this.brandSelected=this.vehicle.idBrand;
+      this.onChangeBrand(null,this.brandSelected);
+      this.modelSelected=this.vehicle.idModel;
+      this.onChangeModel(null,this.modelSelected)
+      this.versionModel=this.vehicle.version;
+    }
+  }
+
   
 
   onClickContinue(){
     this.submitted=true;  
-    console.log(this.vehicle);
+    console.log(this.vehicleForm);
+    
     if(this.vehicleForm.valid){      
       this.vehicle.brand=this.brandText;
       this.vehicle.model=this.modelText;
+      this.vehicle.idBrand=+this.vehicleForm.controls.mark_vr.value;
+      this.vehicle.idModel=+this.vehicleForm.controls.model_vr.value;
       this.vehicle.versionText=this.versionText;
       this.vehicle.version=+this.versionModel;
       localStorage.setItem("vehicle",JSON.stringify(this.vehicle));

@@ -1,4 +1,4 @@
-<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "line-spin-fade" [fullScreen] = "true">
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true">
     <p style="color: white" > Cargando... </p>
 </ngx-spinner>
 <div class="container mt-5">
@@ -14,8 +14,13 @@
                     <i class="fas fa-check text-success mr-2"></i>
                     <span>Fecha de efecto: {{dateEffect}}</span>
                 </div>
-                <button id="id_policy_continue" class="btn btn-primary col-12 mt-4" (click)="onClickContinue()">Siguente</button>
-                <button id="id_policy_back" class="btn btn-outline-primary col-12 mt-3 mb-3" (click)="onClickBack()">Atras</button>
+                <div class="row mt-4" *ngIf="summary!='yes'">
+                    <button id="id_policy_continue" class="btn btn-primary col-12" (click)="onClickContinue()">Siguente</button>
+                    <button id="id_policy_back" class="btn btn-outline-primary col-12 mt-3 mb-3" (click)="onClickBack()">Atras</button>
+                </div>
+                <div class="row mt-4" *ngIf="summary=='yes'">
+                    <button id="id_policy_contract" class="btn btn-primary col-12" (click)="onClickConfirm()">Contratar</button>
+                </div>
             </div>
            
         

@@ -41,7 +41,7 @@ export class SelectionCoverageComponent implements OnInit {
       coverage:['',Validators.required]
     })
     this.getCovering();
-   
+    this.setValueLocal();
 
   }
 
@@ -63,28 +63,31 @@ export class SelectionCoverageComponent implements OnInit {
 
   onClickContinue(){
     
-    if(this.coveringForm.valid){
-
-    
-
-
-
+    if(this.coveringForm.valid){  
         this.policy.effectiveDate=this.format(this.policy.effectiveDate)
         this.policy.frequency=+this.policy.frequency;
-        this.policy.modality=+this.policy.modality;
-        
-  
-  
+        this.policy.modality=+this.policy.modality;          
         console.log(this.policy);
-        localStorage.setItem("policy",JSON.stringify(this.policy))
-  
-        this.router.navigate(['fincontratacion']);
-      
-     
-    }
-    
+        localStorage.setItem("policy",JSON.stringify(this.policy))  
+        this.router.navigate(['fincontratacion']);           
+    }    
   }
 
+  setValueLocal(){
+    let policy:Policy=JSON.parse(localStorage.getItem("policy"));
+    if(policy){
+      this.policy=policy;
+      this.policy.effectiveDate=this.parseDateToISO(this.policy.effectiveDate)
+    }
+  }
+
+  parseDateToISO(dateString:string):string{
+    
+    let year=dateString.substr(6,4);  
+    let month=dateString.substr(3,2);
+    let day=dateString.substr(0,2);
+    return year+"-"+month+"-"+day;
+  }
  
 
   onClickBack(){

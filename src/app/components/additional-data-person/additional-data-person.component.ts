@@ -55,7 +55,7 @@ export class AdditionalDataPersonComponent implements OnInit {
     this.additionalForm=this.formBuilder.group({
       licenses_intervening:['',Validators.required],
       number_intervening:['',Validators.required],
-      obtaning_intervening:['30-12-2007',Validators.required],
+      obtaning_intervening:['',Validators.required],
       gender_intervening:['',Validators.required]
     })
     this.getDrivingLicenses();
@@ -122,7 +122,7 @@ export class AdditionalDataPersonComponent implements OnInit {
       this.drivingLicenses=person.drivingLicenses[0];
       this.number_int=this.drivingLicenses.numberLicense;
       this.type_license=this.drivingLicenses.type;
-      this.yesterdayDateFilter();
+      this.obtaning=this.parseDateToISO(this.drivingLicenses.date);
       this.gender=person.gender;
     }
   }
@@ -134,11 +134,20 @@ export class AdditionalDataPersonComponent implements OnInit {
   format(date){
     const dateSendingToServer = this.datePipe.transform(date, 'dd-MM-yyyy')
     return dateSendingToServer
+  } 
+
+  parseDateToISO(dateString:string):string{
+    
+    let year=dateString.substr(6,4);  
+    let month=dateString.substr(3,2);
+    let day=dateString.substr(0,2);
+    return year+"-"+month+"-"+day;
   }
 
-  yesterdayDateFilter(){        
-    let yesterday = new Date();
-    yesterday.setDate(yesterday.getDate()-1);
+  yesterdayDateFilter(){
+    
+    let dateString = this.drivingLicenses[0].date; 
+    let yesterday = new Date(dateString);        
     this.obtaning = this.datePipe.transform(yesterday, 'yyyy-MM-dd');
  
   

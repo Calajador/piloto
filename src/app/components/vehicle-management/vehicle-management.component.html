@@ -27,35 +27,58 @@
                         </div>
                         <div class="form-row mt-3">
                             <label class="col-md-3">Coste</label>
-                            <input type="number" [(ngModel)]="vehicle.price"
-                            id="cost_vr"
-                             formControlName="cost_vr" class="form-control col-md-9">
+                            <div class="form-group  col-md-9">
+                                <input type="number" [(ngModel)]="vehicle.price"
+                                [ngClass]="{ 'is-invalid': submitted && f.cost_vr.errors}" 
+                                id="cost_vr"
+                                 formControlName="cost_vr" class="form-control">
+                                 <div  *ngIf="submitted && f.cost_vr.errors" class="text-center invalid-feedback">
+                                    Porfavor digite el precio de su vehiculo
+                                </div> 
+                            </div>
+                          
                         </div>
                         <div class="form-row mt-3">
                             <label class="col-md-3">KMs Actuales</label>
-                            <input type="number" [(ngModel)]="vehicle.currentKms" 
-                            id="current_km_vr"
-                            formControlName="current_km_vr" class="form-control col-md-3">
-                            
-                            
+                            <div class="form-group col-md-3">
+                                <input type="number" [(ngModel)]="vehicle.currentKms" 
+                                id="current_km_vr"
+                                [ngClass]="{ 'is-invalid': submitted && f.current_km_vr.errors}" 
+                                formControlName="current_km_vr" class="form-control">
+                                <div  *ngIf="submitted && f.current_km_vr.errors" class="text-center invalid-feedback">
+                                    Debe ser mayor que 0
+                                </div> 
+                            </div>                                                                                 
                             <label class="col-md-3">KMs Previstos</label>
-                            <input type="number" [(ngModel)]="vehicle.expectedKms" 
-                            id="provied_km_vr"
-                            formControlName="provied_km_vr" class="form-control col-md-3">
-                         
-                         
+                            <div class="form-group col-md-3">
+                              
+                                    <input type="number" [(ngModel)]="vehicle.expectedKms" 
+                                    id="provied_km_vr"
+                                    [ngClass]="{ 'is-invalid': submitted && f.provied_km_vr.errors}" 
+                                    formControlName="provied_km_vr" class="form-control">     
+                                    <div  *ngIf="submitted && f.provied_km_vr.errors" class="text-center invalid-feedback">
+                                      Debe ser mayor que 0
+                                    </div> 
+                               
+                               
+                            </div> 
+                                                                       
                         </div>
                         <div class="form-row mt-3">
                             <label class="col-md-3">Año vehiculo</label>
                             <input type="number" [(ngModel)]="vehicle.year"
                             id="year_vr"
+                            [ngClass]="{ 'is-invalid': submitted && f.year_vr.errors}" 
                              formControlName="year_vr" class="form-control col-md-9">
-                               
+                             <div  *ngIf="submitted && f.car_registration_vr.errors" class="text-center invalid-feedback">
+                                Porfavor digite el año de fabricación de su vehiculo
+                            </div>   
                            
                         </div>
                         <div class="form-row mt-3">
                             <label class="col-md-3">Marca</label>
                             <select class="form-control col-md-9" [(ngModel)]="brandSelected"
+                            [ngClass]="{ 'is-invalid': submitted && f.mark_vr.errors}" 
                              formControlName="mark_vr" id="mark_vr" (change)="onChangeBrand($event,brandSelected)" >
                                 <option *ngFor="let item of brands" [value]="item.id">{{item.brand}}</option>
                             </select>
@@ -65,6 +88,7 @@
                             <label class="col-md-3">Modelo</label>
                             <select class="form-control col-md-9" 
                             [(ngModel)]="modelSelected" id="model_vr"
+                            [ngClass]="{ 'is-invalid': submitted && f.model_vr.errors}" 
                             formControlName="model_vr" (change)="onChangeModel($event,modelSelected)" >
                                 <option *ngFor="let item of vehicleModels" [value]="item.id">{{item.model}}</option>
                             </select>
@@ -72,11 +96,17 @@
                         </div>
                         <div class="form-row mt-3">
                             <label class="col-md-3">Vérsion</label>
-                            <select class="form-control col-md-9" id="version_vr"
-                             [(ngModel)]="versionModel" formControlName="version_vr" (change)="onChangeVersion($event,versionModel)">
-                                <option *ngFor="let item of version" [value]="item.id">{{item.version}}</option> 
-                            </select>
-                    
+                            <div class="form-group col-md-9"> 
+                                <select class="form-control" id="version_vr"
+                                [ngClass]="{ 'is-invalid': submitted && f.version_vr.errors}" 
+                                 [(ngModel)]="versionModel" formControlName="version_vr" (change)="onChangeVersion($event,versionModel)">
+                                    <option *ngFor="let item of version" [value]="item.id">{{item.version}}</option> 
+                                </select>
+                                <div  *ngIf="submitted && f.version_vr.errors" class="text-center invalid-feedback">
+                                    Porfavor digite la version de su vehiculo
+                                </div> 
+                            </div>
+                            
                         </div>
                         <div class="row justify-content-between mt-4 p-3">                                                                
                             <button class="btn btn-outline-primary col-md-3" (click)="onClickBack()">Atras</button>                                                                              
