@@ -14,6 +14,7 @@ export class AccountAdditionalComponent implements OnInit {
   account:number;
   accountForm:any;
   payment:Payment;
+  submitted:boolean;
 
   constructor(private router:Router,
     private formBuilder:FormBuilder,
@@ -21,6 +22,8 @@ export class AccountAdditionalComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.submitted=false;
+    let regexNumber="^[0-9]+$"
     this.account=0;
     this.payment={
       account:"",
@@ -29,7 +32,7 @@ export class AccountAdditionalComponent implements OnInit {
     }
     this.accountForm=this.formBuilder.group(
       {
-        number_account: ['', [Validators.required]],
+        number_account: ['', [Validators.required,Validators.pattern(regexNumber)]],
       }
     )
    
@@ -41,9 +44,11 @@ export class AccountAdditionalComponent implements OnInit {
     this.switchAccount=!this.switchAccount;
   }
 
+  get f() { return this.accountForm.controls;}
+
   onClickContinue(){
   
-
+    this.submitted=true;
     if(this.account!=0){    
       this.payment.account=this.account.toString();
       if(this.switchAccount){

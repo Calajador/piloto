@@ -142,14 +142,35 @@ export class PersonalManagementComponent implements OnInit {
           }else{
             localStorage.setItem("personinsured",JSON.stringify(res[0]));
             localStorage.setItem("insured",res.id)
+            this.router.navigate(['/asignacion','insured']) 
           }
           
         
           this.spinner.hide();
         },
         err=>{
-          this.spinner.hide();
-          console.log(err); 
+          if(err.status==401){
+            this.personService.createPerson(this.person).subscribe(
+              res=>{
+                if(this.type=='policy'){
+                  localStorage.setItem("policyholder",res[0].id) 
+                  localStorage.setItem("personholder",JSON.stringify(res[0]));
+                  this.router.navigate(['/asignacion','policy']) 
+                  
+                }else{
+                  localStorage.setItem("personinsured",JSON.stringify(res[0]));
+                  localStorage.setItem("insured",res.id)
+                  this.router.navigate(['/asignacion','insured']) 
+                }
+                
+              
+                this.spinner.hide(); 
+              },
+              err=>{
+                console.log(err);
+              }
+            )
+          }
         }
       )           
     }        
@@ -160,8 +181,7 @@ export class PersonalManagementComponent implements OnInit {
     return dateSendingToServer
   }
 
-  parseDateToISO(dateString:string):string{
-    
+  parseDateToISO(dateString:string):string{    
     let year=dateString.substr(6,4);  
     let month=dateString.substr(3,2);
     let day=dateString.substr(0,2);

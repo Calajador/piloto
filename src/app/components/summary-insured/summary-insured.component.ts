@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Person } from 'src/app/model/Person';
+import { MasterService } from 'src/app/services/master.service';
+import { Country } from 'src/app/model/Country';
 
 @Component({
   selector: 'app-summary-insured',
@@ -11,8 +13,10 @@ export class SummaryInsuredComponent implements OnInit {
 
   intervenerForm:any;
   person:Person;
-
-  constructor(private formBuilder:FormBuilder) { }
+  countries:Country[];
+  idCountry:number;
+  constructor(private formBuilder:FormBuilder,
+    private masterService:MasterService) { }
 
   ngOnInit(): void {
 
@@ -28,8 +32,22 @@ export class SummaryInsuredComponent implements OnInit {
       summary_floor:[this.person.addresses[0].floor],
       summary_city:[this.person.addresses[0].province],
       summary_codepostal:[this.person.addresses[0].postalCode],
-      summary_country:[this.person.addresses[0].idCountry]
+      summary_country:['']
     })
+
+    this.getCountries();
+  }
+
+  getCountries(){
+    this.masterService.getCountries().subscribe(
+      res=>{
+        this.countries=res;
+        this.idCountry=this.person.addresses[0].idCountry
+      },
+      err=>{
+        console.log(err);
+      }
+    )
   }
 
 }

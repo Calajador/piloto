@@ -34,7 +34,7 @@ export class ProductSelectionComponent implements OnInit {
         
       },
       err=>{
-        
+        console.log(err)
        
       }
     )

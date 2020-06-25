@@ -7,6 +7,7 @@ import { PolicyService } from 'src/app/services/policy.service';
 import { BankInvoicing } from 'src/app/model/BankInvoicing';
 import { NgxSpinner } from 'ngx-spinner/lib/ngx-spinner.enum';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-credit-card',
   templateUrl: './credit-card.component.html',
@@ -25,23 +26,27 @@ export class CreditCardComponent implements OnInit {
   typeCard:string;
   formCredit:any;
   id:number;
-
+  submitted:boolean;
   
 
   constructor(private router:Router,
     private _route:ActivatedRoute,
     private policyService:PolicyService,
     private spinner: NgxSpinnerService,
+    private toastr: ToastrService,
     private formBuilder:FormBuilder,
     private location:Location) { }
 
   ngOnInit(): void {
     this.id=+this._route.snapshot.paramMap.get('id');
+
+    let regexNumber="^[0-9]+$"
+
     this.formCredit=this.formBuilder.group({
-      cardHolder:['',Validators.required],
-      numcard:['',Validators.required],
+      cardHolder:['',[Validators.required]],
+      numcard:['',[Validators.required,Validators.pattern(regexNumber)]],
       yearcard:['',Validators.required],
-      cvv_card:['',Validators.required],  
+      cvv_card:['',[Validators.required,Validators.maxLength(4),Validators.minLength(3)]],  
       monthcard:['',Validators.required]
     })
     this.visa=false;
@@ -54,15 +59,17 @@ export class CreditCardComponent implements OnInit {
     this.american=false;;
   }
 
+  get f() { return this.formCredit.controls;}
+
+
 
   validateCard(){
     //algoritmo de luhn
   }
 
   onClickPay(){
+    this.submitted=true;
     let credit:CreditCard;
-    let bankInvoicing:BankInvoicing;
-
     if(this.formCredit.valid){
       credit={
         cvv:this.cvv,
@@ -74,25 +81,21 @@ export class CreditCardComponent implements OnInit {
       }
       this.spinner.show();
       this.policyService.payCreditCard(credit).subscribe(
-        res=>{
-          this.spinner.hide()
-          this.router.navigate(['finproceso'])
+        res=>{          
+          if(res=='KO'){
+            this.spinner.hide()
+            this.router.navigate(['finproceso','ko'])
+          }else if(res=='OK'){
+            this.spinner.hide()
+            this.router.navigate(['finproceso','ok'])
+          }else{
+            this.spinner.hide();
+            this.toastr.error("Ocurrio un error al completar la accion,no se logro pagar con tarjeta ni con pago directo","Error")
+          }
+         
         },
         err=>{
-          bankInvoicing={
-            idBankInvoicing:this.id
-          }
           
-          this.policyService.bankInvoicing(bankInvoicing).subscribe(
-            res=>{
-              this.spinner.hide();
-              this.router.navigate(['finproceso'])
-             
-            },
-            err=>{
-              this.spinner.hide();
-            }
-          )
         }
       )
      

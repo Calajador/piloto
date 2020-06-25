@@ -68,8 +68,20 @@ export class PolicyCalculationComponent implements OnInit {
           this.spinner.hide();
         },
         err=>{
-          console.log(err);
           
+          console.log(err);
+          if(err.status==401){
+            this.policyService.calculatePrice(this.calculatePolicy).subscribe(
+              res=>{
+                this.price=res.totalPrice
+                this.policy.price=this.price;
+                this.spinner.hide();
+              },
+              err=>{
+                console.log(err)
+              }
+            )
+          }
         }
       )
 
@@ -94,7 +106,7 @@ export class PolicyCalculationComponent implements OnInit {
     
     let bankInvoicing:BankInvoicing;
     this.policyProcess={
-      agent:1,
+      agent:+localStorage.getItem("id"),
       insured:+localStorage.getItem("insured"),
       payment:JSON.parse(localStorage.getItem("payment")),
       policy:JSON.parse(localStorage.getItem("policy")),
@@ -116,7 +128,7 @@ export class PolicyCalculationComponent implements OnInit {
          
           this.policyService.bankInvoicing(bankInvoicing).subscribe(
             res=>{
-              this.router.navigate(['finproceso'])
+              this.router.navigate(['finproceso','KO'])
               this.spinner.hide();
             },
             err=>{
@@ -127,7 +139,9 @@ export class PolicyCalculationComponent implements OnInit {
         }
       },
       err=>{
-        console.log(err);
+        if(err.status==401){
+          this.onClickConfirm();
+        }
       }
     )   
   }

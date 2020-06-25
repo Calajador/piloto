@@ -28,7 +28,7 @@ const routes: Routes = [
   },
   { path: 'dni/:type', component: DniSearchComponent, canActivate:[AuthGuard]  },
   { path: 'adicional', component: AdditionalDataPersonComponent , canActivate:[AuthGuard] },
-  { path: 'finproceso', component: SuccessProcessComponent, canActivate:[AuthGuard]  },
+  { path: 'finproceso/:success', component: SuccessProcessComponent, canActivate:[AuthGuard]  },
   { path: 'coberturas', component: SelectionCoverageComponent, canActivate:[AuthGuard]  }, 
   { path: 'resumen/:type', component: SummaryComponent, canActivate:[AuthGuard]  },  
   { path: 'cuenta', component: AccountAdditionalComponent, canActivate:[AuthGuard]  }, 

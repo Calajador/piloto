@@ -19,7 +19,7 @@
                         formControlName="name_singup"
                         id="name_singup"
                         type="text">  
-                        <div  *ngIf="submitted && f.surname_singup.errors" class="col-md-10 text-center invalid-feedback">
+                        <div  *ngIf="submitted && f.surname_singup.errors" class="col-md-10 invalid-feedback">
                             Porfavor digite un nombre
                         </div>                             
                     </div>
@@ -31,7 +31,7 @@
                         [ngClass]="{ 'is-invalid': submitted && f.surname_singup.errors}" 
                         [(ngModel)]="person.lastName"
                             formControlName="surname_singup"  type="text">
-                        <div  *ngIf="submitted && f.surname_singup.errors" class="col-md-10 text-center invalid-feedback">
+                        <div  *ngIf="submitted && f.surname_singup.errors" class="col-md-10 invalid-feedback">
                             Porfavor digite un apellido
                         </div>
                     </div>
@@ -45,7 +45,7 @@
                         [(ngModel)]="identification.identification"
                         formControlName="dni_singup" 
                         [ngClass]="{ 'is-invalid': submitted && f.dni_singup.errors}"  type="text">  
-                        <div  *ngIf="submitted && f.dni_singup.errors" class="col-md-10 text-center invalid-feedback">
+                        <div  *ngIf="submitted && f.dni_singup.errors" class="col-md-10 invalid-feedback">
                             Porfavor digite un DNI válido
                         </div> 
                     </div>
@@ -55,7 +55,7 @@
                         [(ngModel)]="person.dateBorn"
                         id="date_singup"
                         [ngClass]="{ 'is-invalid': submitted && f.date_singup.errors}" type="date"> 
-                        <div  *ngIf="submitted && f.date_singup.errors" class="col-md-10 text-center invalid-feedback">
+                        <div  *ngIf="submitted && f.date_singup.errors" class="col-md-10 invalid-feedback">
                             Porfavor digite un Fecha de nacimiento valida
                         </div> 
                     </div>
@@ -108,7 +108,7 @@
                         [(ngModel)]="address.postalCode"
                         id="postalcode_singup"
                         formControlName="postalcode_singup" type="text">
-                        <div  *ngIf="submitted && f.date_singup.errors" class="col-md-10 text-center invalid-feedback">
+                        <div  *ngIf="submitted && f.date_singup.errors" class="col-md-10 invalid-feedback">
                             Porfavor digite un codigo de postal válido
                         </div>   
                     </div>                   

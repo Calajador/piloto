@@ -48,7 +48,7 @@ export class VehicleManagementComponent implements OnInit {
     }
 
     this.vehicleForm=this.formBuilder.group({
-      car_registration_vr:['',[Validators.required,Validators.pattern(plateRegex)]],
+      car_registration_vr:['',[Validators.required,Validators.pattern(plateRegex),Validators.minLength(6),Validators.maxLength(8)]],
       cost_vr:['',[Validators.required,Validators.min(1)]],
       current_km_vr:['',[Validators.required,Validators.min(1)]],
       provied_km_vr:['',[Validators.required,Validators.min(1)]],
@@ -100,12 +100,13 @@ export class VehicleManagementComponent implements OnInit {
   }
 
   public setSelectedBrandText(value: number): void {
-
+    
     if (this.brands) {
        let status: Brand = this.brands.find(s => s.id == value);
        if (status)
          this.brandText = status.brand;
-     }
+         console.log(this.brandText);
+    }
      else
         this.brandText = '';
   }
