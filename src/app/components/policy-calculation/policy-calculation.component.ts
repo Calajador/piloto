@@ -104,7 +104,7 @@ export class PolicyCalculationComponent implements OnInit {
 
   onClickConfirm(){
     
-    let bankInvoicing:BankInvoicing;
+
     this.policyProcess={
       agent:+localStorage.getItem("id"),
       insured:+localStorage.getItem("insured"),
@@ -122,26 +122,12 @@ export class PolicyCalculationComponent implements OnInit {
           this.spinner.hide();
           this.router.navigate(['tarjeta',res.id])
         }else{
-          bankInvoicing={
-            idBankInvoicing:res.id
-          }
-         
-          this.policyService.bankInvoicing(bankInvoicing).subscribe(
-            res=>{
-              this.router.navigate(['finproceso','KO'])
-              this.spinner.hide();
-            },
-            err=>{
-              this.spinner.hide();
-            }
-          )
-         
+          this.spinner.hide();
+          this.router.navigate(['finproceso','ko'])
         }
       },
       err=>{
-        if(err.status==401){
-          this.onClickConfirm();
-        }
+        this.spinner.hide();
       }
     )   
   }

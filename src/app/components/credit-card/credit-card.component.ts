@@ -20,6 +20,7 @@ export class CreditCardComponent implements OnInit {
   american:boolean;
   card:string;
   name:string;
+  validCard:boolean;
   cvv:string;
   month:string;
   year:string;
@@ -44,13 +45,14 @@ export class CreditCardComponent implements OnInit {
 
     this.formCredit=this.formBuilder.group({
       cardHolder:['',[Validators.required]],
-      numcard:['',[Validators.required,Validators.pattern(regexNumber)]],
+      numcard:['',[Validators.required,Validators.pattern(regexNumber),Validators.maxLength(16)]],
       yearcard:['',Validators.required],
       cvv_card:['',[Validators.required,Validators.maxLength(4),Validators.minLength(3)]],  
       monthcard:['',Validators.required]
     })
     this.visa=false;
     this.mastercard=false;
+
     this.cvv="";
     this.name="";
     this.month="";
@@ -70,7 +72,7 @@ export class CreditCardComponent implements OnInit {
   onClickPay(){
     this.submitted=true;
     let credit:CreditCard;
-    if(this.formCredit.valid){
+    if(this.formCredit.valid && this.validCard==true){
       credit={
         cvv:this.cvv,
         idPolicy:this.id,
@@ -82,10 +84,10 @@ export class CreditCardComponent implements OnInit {
       this.spinner.show();
       this.policyService.payCreditCard(credit).subscribe(
         res=>{          
-          if(res=='KO'){
+          if(res.response=='KO'){
             this.spinner.hide()
-            this.router.navigate(['finproceso','ko'])
-          }else if(res=='OK'){
+            this.router.navigate(['finproceso','koe'])
+          }else if(res.response=='OK'){
             this.spinner.hide()
             this.router.navigate(['finproceso','ok'])
           }else{
@@ -116,17 +118,21 @@ export class CreditCardComponent implements OnInit {
       this.visa=true;
       this.american=false;
       this.mastercard=false;
+      this.validCard=true;
     }else if(mastercardRegEx.test(this.card)){
       this.mastercard=true;
       this.visa=false;
       this.american=false;
+      this.validCard=true;
     }else if(amexpRegEx.test(this.card)){
       this.american=true;
       this.visa=false;
+      this.validCard=true;
       this.mastercard=false;
     }else{
       this.american=false;
       this.visa=false;
+      this.validCard=true;
       this.mastercard=false;
     }
     

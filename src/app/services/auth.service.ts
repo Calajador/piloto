@@ -42,6 +42,14 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('username');
+    localStorage.removeItem('id');
+    localStorage.removeItem("personholder");
+    localStorage.removeItem("personinsured");
+    localStorage.removeItem("policyholder");
+    localStorage.removeItem("vehicle");
+    localStorage.removeItem("payment");
+    localStorage.removeItem("policy");
+    localStorage.removeItem("insured");
     this.currentUserSubject.next(null);
     this.router.navigate(['/login']);
   }
