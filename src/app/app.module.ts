@@ -16,7 +16,8 @@ import { IntervenerAllocationComponent } from './components/intervener-allocatio
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { DatePipe } from '@angular/common';
-
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdditionalDataPersonComponent } from './components/additional-data-person/additional-data-person.component';
 import { VehicleManagementComponent } from './components/vehicle-management/vehicle-management.component';
 import { SelectionCoverageComponent } from './components/selection-coverage/selection-coverage.component';
@@ -25,6 +26,9 @@ import { AccountAdditionalComponent } from './components/account-additional/acco
 import { SuccessProcessComponent } from './components/success-process/success-process.component';
 import { SummaryComponent } from './components/summary/summary.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CreditCardComponent } from './components/credit-card/credit-card.component';
+import { SummaryVehicleComponent } from './components/summary-vehicle/summary-vehicle.component';
+import { SummaryInsuredComponent } from './components/summary-insured/summary-insured.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +46,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     PolicyCalculationComponent,
     AccountAdditionalComponent,
     SuccessProcessComponent,
-    SummaryComponent
+    SummaryComponent,
+    CreditCardComponent,
+    SummaryVehicleComponent,
+    SummaryInsuredComponent
     
   ],
   imports: [
@@ -51,6 +58,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     AppRoutingModule,
     NgxSpinnerModule,
+    ToastrModule.forRoot() ,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
     FontAwesomeModule,

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-success-process',
@@ -8,16 +8,21 @@ import { Router } from '@angular/router';
 })
 export class SuccessProcessComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  type:string;
+
+  constructor(private router:Router,
+    private _route:ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.type=this._route.snapshot.paramMap.get('success');
   }
 
   onClickFinish(){
-    localStorage.setItem("persontmp","");
-    localStorage.setItem("policyholder","");
-    localStorage.setItem("vehicle","");
-    localStorage.setItem("insured","");
+    localStorage.removeItem("personholder");
+    localStorage.removeItem("personinsured");
+    localStorage.removeItem("policyholder");
+    localStorage.removeItem("vehicle");
+    localStorage.removeItem("insured");
     this.router.navigate(['producto'])
   }
 

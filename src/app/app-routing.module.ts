@@ -14,10 +14,11 @@ import { PolicyCalculationComponent } from './components/policy-calculation/poli
 import { AccountAdditionalComponent } from './components/account-additional/account-additional.component';
 import { SuccessProcessComponent } from './components/success-process/success-process.component';
 import { SummaryComponent } from './components/summary/summary.component';
+import { CreditCardComponent } from './components/credit-card/credit-card.component';
 
 
 const routes: Routes = [
-  {path:'',redirectTo:'login',pathMatch:'full'},
+  {path:'',redirectTo:'producto',pathMatch:'full'},
   { path: 'altapersona/:type', component: PersonalManagementComponent },
   { path: 'altavehiculo', component: VehicleManagementComponent },
   { 
@@ -25,15 +26,16 @@ const routes: Routes = [
     component: ProductSelectionComponent,
     canActivate:[AuthGuard] 
   },
-  { path: 'dni/:type', component: DniSearchComponent },
-  { path: 'adicional', component: AdditionalDataPersonComponent },
-  { path: 'finproceso', component: SuccessProcessComponent },
-  { path: 'coberturas', component: SelectionCoverageComponent }, 
-  { path: 'resumen', component: SummaryComponent },  
-  { path: 'cuenta', component: AccountAdditionalComponent }, 
-  { path: 'fincontratacion', component: PolicyCalculationComponent }, 
-  { path: 'asignacion/:type', component: IntervenerAllocationComponent },
-  { path: 'regular/:type', component: RegularCustomerComponent },
+  { path: 'dni/:type', component: DniSearchComponent, canActivate:[AuthGuard]  },
+  { path: 'adicional', component: AdditionalDataPersonComponent , canActivate:[AuthGuard] },
+  { path: 'finproceso/:success', component: SuccessProcessComponent, canActivate:[AuthGuard]  },
+  { path: 'coberturas', component: SelectionCoverageComponent, canActivate:[AuthGuard]  }, 
+  { path: 'resumen/:type', component: SummaryComponent, canActivate:[AuthGuard]  },  
+  { path: 'cuenta', component: AccountAdditionalComponent, canActivate:[AuthGuard]  }, 
+  { path: 'fincontratacion', component: PolicyCalculationComponent, canActivate:[AuthGuard]  }, 
+  { path: 'tarjeta/:id', component: CreditCardComponent, canActivate:[AuthGuard]  }, 
+  { path: 'asignacion/:type', component: IntervenerAllocationComponent, canActivate:[AuthGuard]  },
+  { path: 'regular/:type', component: RegularCustomerComponent, canActivate:[AuthGuard]  },
   { path: 'login', component: LoginComponent },
 ];
 

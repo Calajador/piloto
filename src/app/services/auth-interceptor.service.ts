@@ -3,8 +3,10 @@ import { AuthService } from './auth.service';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpClient, HttpHeaders, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { ApiSecret } from '../common/API/ApiSecret';
 import { Observable, throwError } from 'rxjs';
+import {Location} from '@angular/common';
 import { map, catchError } from 'rxjs/operators';
 import { OAuthRequest } from '../common/API/OAuthRequest';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Injectable({
@@ -19,7 +21,9 @@ export class AuthInterceptorService implements HttpInterceptor {
   
   
 
-  constructor(private auth:AuthService) {
+  constructor(private auth:AuthService
+    ,private toastr: ToastrService
+    ,private location:Location) {
     this.ban=false;
    }
 
@@ -36,6 +40,7 @@ export class AuthInterceptorService implements HttpInterceptor {
     let token=localStorage.getItem("token");
   
     request= request.clone({headers:request.headers.set('X-IBM-Client-Id',ApiSecret.client_id)})
+    request= request.clone({headers:request.headers.set('rejectUnauthorized','false')})
     if(token){
       if(!req.url.includes("oauth2")){
         request = request.clone({ headers: request.headers.set('Authorization', 'Bearer ' + token) });
@@ -50,10 +55,10 @@ export class AuthInterceptorService implements HttpInterceptor {
        
         if (err.status === 401) {  
           this.failedRequest=request;                
-            this.getToken(next); 
-                             
-        }else{
-
+            this.getToken(next);                              
+        }else if(err.status===400){
+          
+          this.toastr.error(err.message,"Error server 400")
         
         }
       
@@ -72,7 +77,7 @@ export class AuthInterceptorService implements HttpInterceptor {
   
       let token="";    
     
-      (this.auth.getToken(this.secret)).subscribe(
+      await (this.auth.getToken(this.secret)).subscribe(
         
         resp=>{                 
          console.log(resp)
@@ -82,7 +87,7 @@ export class AuthInterceptorService implements HttpInterceptor {
          this.failedRequest=this.failedRequest.clone({
           headers: this.failedRequest.headers.set("Authorization" , "Bearer " + token)
         });
-        
+        location.reload();
         return next.handle(this.failedRequest).pipe(
           catchError((err:HttpErrorResponse)=>{
 

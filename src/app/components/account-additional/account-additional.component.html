@@ -7,27 +7,36 @@
                     <span>Datos adicionales</span>
                 </div>
                 <div class="card-body">
-                   <form>
+                   <form [formGroup]="accountForm">
                        <div class="form-row mt-2">
                            <div class="col-md-5">
                                <label>Número de cuenta</label>
                            </div>
-                           <input type="number" class="form-control col-md-7">
+                           <div class="form-group col-md-7">
+                                <input type="number" id="number_account"  
+                                [ngClass]="{ 'is-invalid': submitted && f.number_account.errors}"
+                                formControlName="number_account"
+                            [(ngModel)]="account" class="form-control">
+                                <div  *ngIf="submitted && f.number_account.errors" class="invalid-feedback">
+                                    Porfavor digite una cuenta válida
+                                </div> 
+                           </div>
+                           
                        </div>
                        <div class="form-row mt-4 mb-4">
                             <div class="col-md-5">
                                 <label>Primer pago con tarjeta</label>
                             </div>
                             <label class="switch">
-                                <input type="checkbox"  class="success" (change)="onChangeAccount($event)">
+                                <input type="checkbox" id="id_success_account"  class="success" (change)="onChangeAccount($event)">
                                 <span class="slider round">
                                 </span>
                             </label>
                       
                     </div>
                     <div class="row justify-content-between p-3">
-                        <button class="btn btn-outline-primary" (click)="onClickBack()">Atras</button>
-                        <button class="btn btn-primary" (click)="onClickContinue()">Siguiente</button>
+                        <button id="btn_account_back" class="btn btn-outline-primary" (click)="onClickBack()">Atras</button>
+                        <button  id="btn_continue_back"  class="btn btn-primary" (click)="onClickContinue()">Siguiente</button>
                     </div>
                    </form>
                 </div>
