@@ -30,6 +30,7 @@
                                     
                                     <input type="text" class="form-control" [(ngModel)]="card" 
                                     name="numcard"
+                                    maxlength="16"
                                     [ngClass]="{ 'is-invalid': submitted && f.numcard.errors}" 
                                     formControlName="numcard"
                                     id="card_number"
@@ -56,7 +57,7 @@
                                         <option value="24">2024</option>
                                     </select>
                                     <div  *ngIf="submitted && f.yearcard.errors" class="invalid-feedback">
-                                        Porfavor digite el año 
+                                        {{errorYear}}
                                     </div> 
                                 </div>
                                 <div class="form-group col-md-6">
@@ -78,7 +79,7 @@
                                         <option value="12">Diciembre</option>
                                     </select>
                                     <div  *ngIf="submitted && f.monthcard.errors" class="invalid-feedback">
-                                        Porfavor digite el mes de vencimiento
+                                        {{errorMonth}}
                                     </div> 
                                 </div>
                             </div>
@@ -87,6 +88,7 @@
                                     <label>CVV</label>
                                     <input id="cvv_card" type="text" formControlName="cvv_card" 
                                     [ngClass]="{ 'is-invalid': submitted && f.cvv_card.errors}"
+                                    maxlength="4"
                                     class="form-control" [(ngModel)]="cvv"  aria-describedby="emailHelp">
                                     <small  class="form-text text-muted">Se encuentra en la parte inferior al número de su tarjeta</small>
                                     <div  *ngIf="submitted && f.cvv_card.errors" class="invalid-feedback">
@@ -104,4 +106,8 @@
             </div>
         </div>
     </div>
+
 </div>
+
+
+

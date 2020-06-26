@@ -53,9 +53,9 @@ export class LoginComponent implements OnInit {
       this.spinner.show();
         this.authService.singIn(this.user).subscribe(
           res=>{
-     
-            console.log("login","entro")
+                 
             localStorage.setItem("username",this.user.userName)
+            this.authService.currentUserSubject.next(this.user.userName);
             localStorage.setItem("id",res[0].id)
             this.router.navigate(['/producto'])
             this.spinner.hide();

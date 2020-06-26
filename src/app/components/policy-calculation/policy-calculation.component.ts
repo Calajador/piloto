@@ -19,6 +19,7 @@ export class PolicyCalculationComponent implements OnInit {
   price:number;
   policy:Policy;
   dateEffect:string;
+  periodicity:string;
   policyProcess:PolicyProcess;
 
   @Input('summary')
@@ -34,13 +35,14 @@ export class PolicyCalculationComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.type);
     this.getCalculate();
+    this.getPeriodicity();
   }
 
   getCalculate(){
     
     let vehicle:Vehicle=this.getInfoVehicle();
     if(vehicle){
-       this.policy=JSON.parse(localStorage.getItem("policy"));
+      this.policy=JSON.parse(localStorage.getItem("policy"));
       this.calculatePolicy={
         brand:vehicle.brand,
         cost:vehicle.price,
@@ -90,7 +92,27 @@ export class PolicyCalculationComponent implements OnInit {
     }
   }
 
+  getPeriodicity(){
+    console.log(this.policy.modality);
+    switch(this.policy.frequency){
+      case 1:
+        this.periodicity="Mensual";
+      break;
+      case 2:
+        this.periodicity="Bimestral";
+      break;
+      case 3:
+        this.periodicity="Trimestral";
+      break;
+      case 6:
+        this.periodicity="Semestral";
+      break;
+      case 12:
+        this.periodicity="Anual";
+      break;
 
+    }
+  }
 
   getInfoVehicle():any{
     let vehicle=JSON.parse(localStorage.getItem("vehicle"))
