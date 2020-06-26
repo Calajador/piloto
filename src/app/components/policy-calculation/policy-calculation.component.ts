@@ -19,6 +19,7 @@ export class PolicyCalculationComponent implements OnInit {
   price:number;
   policy:Policy;
   dateEffect:string;
+  periodicity:string;
   policyProcess:PolicyProcess;
 
   @Input('summary')
@@ -34,13 +35,14 @@ export class PolicyCalculationComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.type);
     this.getCalculate();
+    this.getPeriodicity();
   }
 
   getCalculate(){
     
     let vehicle:Vehicle=this.getInfoVehicle();
     if(vehicle){
-       this.policy=JSON.parse(localStorage.getItem("policy"));
+      this.policy=JSON.parse(localStorage.getItem("policy"));
       this.calculatePolicy={
         brand:vehicle.brand,
         cost:vehicle.price,
@@ -68,8 +70,20 @@ export class PolicyCalculationComponent implements OnInit {
           this.spinner.hide();
         },
         err=>{
-          console.log(err);
           
+          console.log(err);
+          if(err.status==401){
+            this.policyService.calculatePrice(this.calculatePolicy).subscribe(
+              res=>{
+                this.price=res.totalPrice
+                this.policy.price=this.price;
+                this.spinner.hide();
+              },
+              err=>{
+                console.log(err)
+              }
+            )
+          }
         }
       )
 
@@ -78,7 +92,27 @@ export class PolicyCalculationComponent implements OnInit {
     }
   }
 
+  getPeriodicity(){
+    console.log(this.policy.modality);
+    switch(this.policy.frequency){
+      case 1:
+        this.periodicity="Mensual";
+      break;
+      case 2:
+        this.periodicity="Bimestral";
+      break;
+      case 3:
+        this.periodicity="Trimestral";
+      break;
+      case 6:
+        this.periodicity="Semestral";
+      break;
+      case 12:
+        this.periodicity="Anual";
+      break;
 
+    }
+  }
 
   getInfoVehicle():any{
     let vehicle=JSON.parse(localStorage.getItem("vehicle"))
@@ -92,9 +126,9 @@ export class PolicyCalculationComponent implements OnInit {
 
   onClickConfirm(){
     
-    let bankInvoicing:BankInvoicing;
+
     this.policyProcess={
-      agent:1,
+      agent:+localStorage.getItem("id"),
       insured:+localStorage.getItem("insured"),
       payment:JSON.parse(localStorage.getItem("payment")),
       policy:JSON.parse(localStorage.getItem("policy")),
@@ -110,24 +144,12 @@ export class PolicyCalculationComponent implements OnInit {
           this.spinner.hide();
           this.router.navigate(['tarjeta',res.id])
         }else{
-          bankInvoicing={
-            idBankInvoicing:res.id
-          }
-         
-          this.policyService.bankInvoicing(bankInvoicing).subscribe(
-            res=>{
-              this.router.navigate(['finproceso'])
-              this.spinner.hide();
-            },
-            err=>{
-              this.spinner.hide();
-            }
-          )
-         
+          this.spinner.hide();
+          this.router.navigate(['finproceso','ko'])
         }
       },
       err=>{
-        console.log(err);
+        this.spinner.hide();
       }
     )   
   }

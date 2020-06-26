@@ -9,7 +9,14 @@
                     
                 </div>               
                 <div class="col-md-12 text-center">
+                    <div class="alert alert-primary mt-2" role="alert" *ngIf="type=='ok'">
+                        Primer pago realizado por medio de tarjeta de credito
+                     </div>
+                     <div class="alert alert-warning mt-2" role="alert" *ngIf="type=='koe'">
+                        El primer pago no pudo ser realizado por medio de tarjeta de credito sin embargo se realizará por domiciliación bancaria
+                     </div>
                     <div class="mt-5 mb-5">
+                       
                         <h5>Enhorabuena ha realizado la contratación de su poliza de manera satisfactoria</h5>
                         <span class="text-muted">En los proximos dias recibiras la documentación de su poliza  en su domicilio</span>
                     </div>

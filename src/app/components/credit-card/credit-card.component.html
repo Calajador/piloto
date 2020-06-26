@@ -11,8 +11,13 @@
                         <div class="form-group">
                             <div class="form-group">
                                 <label>Titular</label>
-                                <input type="text" [(ngModel)]="name" class="form-control" id="client_name_card" formControlName="cardHolder" aria-describedby="client_name_card">
+                                <input type="text" [(ngModel)]="name" class="form-control" 
+                                [ngClass]="{ 'is-invalid': submitted && f.cardHolder.errors}" 
+                                id="client_name_card" formControlName="cardHolder" aria-describedby="client_name_card">
                                 <small id="client_name_card" class="form-text text-muted">Nombre y apellidos del titular de la cuenta</small>
+                                <div *ngIf="submitted && f.cardHolder.errors" class="invalid-feedback">
+                                    Porfavor digite la nombre y apellido del titular
+                                </div> 
                             </div>
                             <div class="form-row">
                                 <div *ngIf="mastercard || visa || american" class="align-items-center my-auto col-md-1">
@@ -25,29 +30,41 @@
                                     
                                     <input type="text" class="form-control" [(ngModel)]="card" 
                                     name="numcard"
+                                    maxlength="16"
+                                    [ngClass]="{ 'is-invalid': submitted && f.numcard.errors}" 
                                     formControlName="numcard"
                                     id="card_number"
                                     (change)="onKeyDownCard()">
                                     
                                     <small class="form-text text-muted">Visa, Mastercard, American expres</small>
+                                    <div  *ngIf="submitted && f.numcard.errors" class="invalid-feedback">
+                                        Porfavor digite un número de tarjeta válida
+                                    </div> 
                                 </div>
                             </div>
                            
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label>Año</label>
-                                    <select class="form-control" id="year_card"  formControlName="yearcard" [(ngModel)]="year">
+                                    <select class="form-control" id="year_card"  
+                                    
+                                    [ngClass]="{ 'is-invalid': submitted && f.yearcard.errors}" 
+                                    formControlName="yearcard" [(ngModel)]="year">
                                         <option value="20">2020</option>                              
                                         <option value="21">2021</option>
                                         <option value="22">2022</option>
                                         <option value="23">2023</option>
                                         <option value="24">2024</option>
                                     </select>
-                           
+                                    <div  *ngIf="submitted && f.yearcard.errors" class="invalid-feedback">
+                                        {{errorYear}}
+                                    </div> 
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Mes</label>
-                                    <select class="form-control" id="month_card" formControlName="monthcard" [(ngModel)]="month">
+                                    <select class="form-control" id="month_card" 
+                                    [ngClass]="{ 'is-invalid': submitted && f.monthcard.errors}"
+                                    formControlName="monthcard" [(ngModel)]="month">
                                         <option value="1">Enero</option>                              
                                         <option value="2">Febrero</option>
                                         <option value="3">Marzo</option>
@@ -61,14 +78,22 @@
                                         <option value="11">Noviembre</option>
                                         <option value="12">Diciembre</option>
                                     </select>
-                                 
+                                    <div  *ngIf="submitted && f.monthcard.errors" class="invalid-feedback">
+                                        {{errorMonth}}
+                                    </div> 
                                 </div>
                             </div>
                            <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label>CVV</label>
-                                    <input id="cvv_card" type="text" formControlName="cvv_card" class="form-control" [(ngModel)]="cvv"  aria-describedby="emailHelp">
+                                    <input id="cvv_card" type="text" formControlName="cvv_card" 
+                                    [ngClass]="{ 'is-invalid': submitted && f.cvv_card.errors}"
+                                    maxlength="4"
+                                    class="form-control" [(ngModel)]="cvv"  aria-describedby="emailHelp">
                                     <small  class="form-text text-muted">Se encuentra en la parte inferior al número de su tarjeta</small>
+                                    <div  *ngIf="submitted && f.cvv_card.errors" class="invalid-feedback">
+                                        Porfavor digite el CVV
+                                    </div> 
                                 </div>
                            </div>
                            <div class="form-row justify-content-between mt-3">
@@ -81,4 +106,8 @@
             </div>
         </div>
     </div>
+
 </div>
+
+
+

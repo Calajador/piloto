@@ -12,10 +12,16 @@
                            <div class="col-md-5">
                                <label>Número de cuenta</label>
                            </div>
-                           <input type="number" id="number_account"  
-                          
-                            formControlName="number_account"
-                           [(ngModel)]="account" class="form-control col-md-7">
+                           <div class="form-group col-md-7">
+                                <input type="number" id="number_account"  
+                                [ngClass]="{ 'is-invalid': submitted && f.number_account.errors}"
+                                formControlName="number_account"
+                            [(ngModel)]="account" class="form-control">
+                                <div  *ngIf="submitted && f.number_account.errors" class="invalid-feedback">
+                                    Porfavor digite una cuenta válida
+                                </div> 
+                           </div>
+                           
                        </div>
                        <div class="form-row mt-4 mb-4">
                             <div class="col-md-5">
